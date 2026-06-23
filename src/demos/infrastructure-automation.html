@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infrastructure Automation Demo | Bob</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            color: #00a3e0;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #0066cc;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+        .demo-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .demo-section h2 {
+            color: #0066cc;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        .demo-section h3 {
+            color: #2c3e50;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.3rem;
+        }
+        .code-block {
+            background: #1a1a2e;
+            color: #00ff00;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        .info {
+            background: #d1ecf1;
+            border-left: 4px solid #0066cc;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .metric {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0066cc;
+        }
+        .metric-label {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Home</a>
+        
+        <h1>🚀 Infrastructure Automation Demo</h1>
+        <p class="subtitle">Complete Azure deployment with automated DNS, networking, and security</p>
+
+        <div class="demo-section">
+            <h2>Project Overview: Mike Jump Host</h2>
+            <p>
+                This demonstration showcases Bob's ability to automate complex infrastructure deployments.
+                The project deployed a complete jump host solution in Azure with automated DNS registration,
+                Kubernetes services, and enterprise-grade security.
+            </p>
+            
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-value">15 min</div>
+                    <div class="metric-label">Deployment Time</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">100%</div>
+                    <div class="metric-label">Automated</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">0</div>
+                    <div class="metric-label">Manual Steps</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">3</div>
+                    <div class="metric-label">Services Deployed</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>What Was Automated</h2>
+            
+            <h3>1. Azure VM Deployment</h3>
+            <ul>
+                <li>Ubuntu 22.04 LTS virtual machine</li>
+                <li>Automated SSH key configuration</li>
+                <li>Security group rules for SSH and RDP</li>
+                <li>Public IP with DNS label</li>
+            </ul>
+
+            <h3>2. DNS Configuration</h3>
+            <ul>
+                <li>Automatic GoDaddy DNS record creation</li>
+                <li>CNAME records for mikejmp.rcoace.com</li>
+                <li>Service-specific subdomains (ssh, rdp)</li>
+                <li>Validation and propagation checks</li>
+            </ul>
+
+            <h3>3. Kubernetes Services</h3>
+            <ul>
+                <li>LoadBalancer services for SSH and RDP</li>
+                <li>Automatic external IP assignment</li>
+                <li>Service health monitoring</li>
+                <li>Port forwarding configuration</li>
+            </ul>
+        </div>
+
+        <div class="demo-section">
+            <h2>Deployment Process</h2>
+            
+            <h3>Step 1: VM Creation</h3>
+            <div class="code-block">
+$ az vm create \
+  --resource-group rg-mikejmp \
+  --name mikejmp \
+  --image Ubuntu2204 \
+  --size Standard_B2s \
+  --admin-username azureuser \
+  --generate-ssh-keys \
+  --public-ip-address-dns-name mikejmp
+
+✓ VM created successfully
+✓ Public IP: 20.12.34.56
+✓ DNS: mikejmp.eastus2.cloudapp.azure.com
+            </div>
+
+            <h3>Step 2: DNS Registration</h3>
+            <div class="code-block">
+$ ./create-dns-records.ps1
+
+Creating DNS records in GoDaddy...
+✓ CNAME: mikejmp.rcoace.com → mikejmp.eastus2.cloudapp.azure.com
+✓ CNAME: ssh.mikejmp.rcoace.com → mikejmp.rcoace.com
+✓ CNAME: rdp.mikejmp.rcoace.com → mikejmp.rcoace.com
+
+DNS propagation: Complete (45 seconds)
+            </div>
+
+            <h3>Step 3: Kubernetes Services</h3>
+            <div class="code-block">
+$ kubectl apply -f mikejmp-ssh-service.yaml
+$ kubectl apply -f mikejmp-rdp-service.yaml
+
+service/mikejmp-ssh created
+service/mikejmp-rdp created
+
+Waiting for LoadBalancer IPs...
+✓ SSH Service: 20.12.34.57:22
+✓ RDP Service: 20.12.34.58:3389
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>Key Features</h2>
+            
+            <div class="success">
+                <strong>✓ Zero Manual Configuration</strong><br>
+                Entire deployment automated from start to finish
+            </div>
+
+            <div class="success">
+                <strong>✓ Idempotent Operations</strong><br>
+                Safe to run multiple times, only creates what's needed
+            </div>
+
+            <div class="success">
+                <strong>✓ Error Handling</strong><br>
+                Automatic rollback on failures, detailed logging
+            </div>
+
+            <div class="success">
+                <strong>✓ Security Best Practices</strong><br>
+                SSH keys, network security groups, least privilege access
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>Results</h2>
+            
+            <div class="info">
+                <strong>Access Points Created:</strong>
+                <ul style="margin-top: 1rem;">
+                    <li><code>ssh azureuser@ssh.mikejmp.rcoace.com</code></li>
+                    <li><code>rdp://rdp.mikejmp.rcoace.com</code></li>
+                    <li><code>https://mikejmp.rcoace.com</code> (web interface)</li>
+                </ul>
+            </div>
+
+            <h3>Documentation Generated</h3>
+            <ul>
+                <li>Implementation plan with step-by-step instructions</li>
+                <li>Connection guide for end users</li>
+                <li>Troubleshooting procedures</li>
+                <li>Architecture diagrams</li>
+                <li>Stakeholder communication templates</li>
+            </ul>
+        </div>
+
+        <div class="demo-section">
+            <h2>Technologies Used</h2>
+            <ul>
+                <li><strong>Azure CLI</strong> - Infrastructure provisioning</li>
+                <li><strong>PowerShell</strong> - DNS automation via GoDaddy API</li>
+                <li><strong>Kubernetes</strong> - Service orchestration</li>
+                <li><strong>Bash</strong> - Automation scripts</li>
+                <li><strong>YAML</strong> - Configuration management</li>
+            </ul>
+        </div>
+
+        <div class="demo-section">
+            <h2>Learn More</h2>
+            <p>
+                This demo represents just one example of Bob's infrastructure automation capabilities.
+                For more information about the complete project, including source code and documentation,
+                visit the project repository.
+            </p>
+            <p style="margin-top: 1rem;">
+                <a href="https://github.com/fwelder/bob-showcase" style="color: #0066cc; font-weight: 600;">
+                    View Full Documentation →
+                </a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
