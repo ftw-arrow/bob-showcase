@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow Global Services Navigator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --arrow-orange: #FF671F;
+            --arrow-orange-light: #FF8547;
+            --arrow-orange-dark: #E55A1A;
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-300: #cbd5e1;
+            --slate-600: #475569;
+            --slate-700: #334155;
+            --slate-800: #1e293b;
+            --slate-900: #0f172a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background-color: var(--slate-50);
+            color: var(--slate-900);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: #000000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .arrow-logo-img {
+            height: 36px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            transition: opacity 0.3s;
+        }
+
+        .arrow-logo-img:hover {
+            opacity: 0.8;
+        }
+
+        .logo-divider {
+            height: 32px;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .logo-text h1 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.125rem;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text .orange {
+            color: #60a5fa;
+        }
+
+        .logo-text p {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--arrow-orange);
+            color: white;
+            padding: 0.625rem 1.75rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary:hover {
+            background: var(--arrow-orange-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 103, 31, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--slate-900) 0%, var(--slate-800) 50%, var(--slate-900) 100%);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero .gradient-text {
+            color: #60a5fa;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--slate-300);
+            margin-bottom: 3rem;
+        }
+
+        .value-props {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .value-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--arrow-orange);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 24px;
+        }
+
+        .value-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .value-card p {
+            font-size: 1rem;
+            color: var(--slate-300);
+        }
+
+        /* Solution Mapper */
+        .solution-mapper {
+            background: white;
+            padding: 3rem 2rem;
+            border-bottom: 1px solid var(--slate-200);
+        }
+
+        .mapper-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .mapper-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 103, 31, 0.1);
+            color: var(--arrow-orange);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .mapper-content h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .mapper-content > p {
+            color: var(--slate-600);
+            margin-bottom: 2rem;
+        }
+
+        .dropdown {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .dropdown-button {
+            width: 100%;
+            background: var(--slate-50);
+            border: 2px solid var(--slate-300);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.125rem;
+            font-weight: 500;
+            transition: border-color 0.3s;
+        }
+
+        .dropdown-button:hover {
+            border-color: var(--arrow-orange);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid var(--slate-200);
+            border-radius: 12px;
+            margin-top: 0.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 10;
+        }
+
+        .dropdown-menu.active {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--slate-100);
+            cursor: pointer;
+            transition: background 0.2s;
+            text-align: left;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(255, 103, 31, 0.05);
+        }
+
+        .dropdown-item-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .dropdown-item-desc {
+            font-size: 0.875rem;
+            color: var(--slate-600);
+        }
+
+        .recommendation-box {
+            background: linear-gradient(to right, rgba(255, 103, 31, 0.1), rgba(255, 133, 71, 0.1));
+            border: 2px solid rgba(255, 103, 31, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: none;
+            text-align: left;
+        }
+
+        .recommendation-box.active {
+            display: flex;
+            gap: 1rem;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .rec-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--arrow-orange);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .rec-content h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Services Section */
+        .services-section {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transform: translateY(-4px);
+        }
+
+        .service-card.active {
+            border-color: var(--arrow-orange);
+            box-shadow: 0 10px 30px rgba(255, 103, 31, 0.2);
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--arrow-orange);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: var(--slate-900);
+        }
+
+        .persona-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .persona-hot {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .persona-medium {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .persona-cold {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .service-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .service-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--arrow-orange);
+            font-weight: bold;
+        }
+
+        .probing-questions {
+            background: var(--slate-50);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .probing-questions h4 {
+            font-size: 0.875rem;
+            color: var(--slate-700);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .probing-questions ul {
+            list-style: none;
+        }
+
+        .probing-questions li {
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+            color: var(--slate-600);
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .probing-questions li:before {
+            content: "?";
+            position: absolute;
+            left: 0;
+            color: var(--arrow-orange);
+            font-weight: bold;
+        }
+
+        /* Chat Agent */
+        .chat-bubble {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--arrow-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 103, 31, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .chat-bubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 103, 31, 0.5);
+        }
+
+        .chat-bubble svg {
+            width: 28px;
+            height: 28px;
+            color: white;
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 6rem;
+            right: 2rem;
+            width: 400px;
+            max-width: calc(100vw - 4rem);
+            height: 600px;
+            max-height: calc(100vh - 10rem);
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .chat-window.active {
+            display: flex;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-header {
+            background: var(--arrow-orange);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            font-size: 1.125rem;
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .message.agent {
+            background: var(--slate-100);
+            align-self: flex-start;
+        }
+
+        .message.user {
+            background: var(--arrow-orange);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .chat-input-area {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--slate-200);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid var(--slate-200);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            outline: none;
+        }
+
+        .chat-input:focus {
+            border-color: var(--arrow-orange);
+        }
+
+        .chat-send {
+            background: var(--arrow-orange);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .chat-send:hover {
+            background: var(--arrow-orange-dark);
+        }
+
+        /* Lab Architecture Section */
+        .lab-architecture-section {
+            background: var(--slate-100);
+            padding: 4rem 2rem;
+        }
+
+        .lab-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .lab-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .lab-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-bottom: 1rem;
+        }
+
+        .lab-header p {
+            font-size: 1.25rem;
+            color: var(--slate-600);
+        }
+
+        .lab-content {
+            display: flex;
+            gap: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .lab-sidebar {
+            width: 280px;
+            background: white;
+            padding: 2rem 1.5rem;
+            border-right: 2px solid var(--slate-200);
+        }
+
+        .lab-sidebar h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--slate-900);
+        }
+
+        .lab-legend {
+            margin-bottom: 2rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 20px;
+            margin-right: 12px;
+            border-radius: 4px;
+        }
+
+        .legend-item span {
+            font-size: 0.875rem;
+            color: var(--slate-700);
+        }
+
+        .lab-info-panel {
+            background: var(--slate-50);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .lab-info-panel h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--slate-900);
+        }
+
+        .lab-info-panel p {
+            font-size: 0.875rem;
+            line-height: 1.6;
+            color: var(--slate-600);
+        }
+
+        .lab-info-panel ul {
+            margin-top: 1rem;
+            padding-left: 1.25rem;
+        }
+
+        .lab-info-panel li {
+            font-size: 0.8125rem;
+            line-height: 1.6;
+            color: var(--slate-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .lab-diagram {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            max-height: 800px;
+        }
+
+        .diagram-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0f62fe;
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #e8f0ff;
+            border-radius: 8px;
+            border: 2px solid #0f62fe;
+        }
+
+        .product-headers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-header {
+            background: #f4f4f4;
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid var(--slate-300);
+        }
+
+        .product-link {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #0f62fe;
+            text-decoration: underline;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .product-link:hover {
+            color: #0043ce;
+        }
+
+        .layer {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .layer-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--slate-600);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .component-row {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .component-row.split {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .component {
+            padding: 1.25rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .component.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .component.clickable {
+            cursor: pointer;
+        }
+
+        .component.clickable:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-color: #0f62fe;
+        }
+
+        .component.active {
+            border-color: #0f62fe;
+            box-shadow: 0 0 0 3px rgba(15, 98, 254, 0.2);
+        }
+
+        .component-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--slate-900);
+        }
+
+        .component-subtitle {
+            font-size: 0.8125rem;
+            color: var(--slate-600);
+        }
+
+        /* Color Layers */
+        .ai-layer {
+            background: #d4bbff;
+        }
+
+        .data-layer {
+            background: #a7f0ba;
+        }
+
+        .governance-layer {
+            background: #d0e2ff;
+        }
+
+        .infrastructure-layer {
+            background: #bae6ff;
+        }
+
+        .governance-platform-layer .component-row {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .infrastructure-details {
+            grid-template-columns: repeat(3, 1fr);
+            margin-top: 1rem;
+        }
+
+        .worker-node {
+            background: var(--slate-200);
+            padding: 1rem;
+            border-radius: 6px;
+            border: 2px solid var(--slate-400);
+        }
+
+        .node-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 0.75rem;
+            color: var(--slate-900);
+        }
+
+        .gpu-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        .gpu {
+            padding: 0.75rem 0.5rem;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--slate-900);
+        }
+
+        .cloud-platform {
+            margin-top: 1.5rem;
+            background: var(--arrow-orange);
+            padding: 1.5rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .platform-label {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.125rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-window {
+                width: calc(100vw - 2rem);
+                right: 1rem;
+                bottom: 5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <!-- Arrow Official Logo -->
+                <img src="images.png"
+                     alt="Arrow Logo"
+                     class="arrow-logo-img">
+                <div class="logo-divider"></div>
+                <div class="logo-text">
+                    <h1><span class="orange">Global Services</span></h1>
+                    <p>Technical Services</p>
+                </div>
+            </div>
+            <a href="mailto:GLBServicesSales@arrow.com" class="btn-primary">
+                <span>✉</span>
+                <span>Contact Sales</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>
+            Simplify IT with Arrow's<br>
+            <span class="gradient-text">Unified Technical Services</span>
+        </h1>
+        <p>One partner for Support, Adoption, and Managed Services</p>
+
+        <div class="value-props">
+            <div class="value-card">
+                <div class="value-icon">🛡️</div>
+                <h3>24/7 Global Support</h3>
+                <p>Multi-vendor expertise with round-the-clock coverage in 15+ languages</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🚀</div>
+                <h3>Seamless Adoption</h3>
+                <p>M&A integration, migrations, and workshops with ongoing support</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">⚡</div>
+                <h3>Proactive Management</h3>
+                <p>From monitoring to full lifecycle management - we've got you covered</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Mapper -->
+    <section class="solution-mapper">
+        <div class="mapper-content">
+            <div class="mapper-badge">
+                <span>🎯</span>
+                <span>Solution Mapper</span>
+            </div>
+            <h2>What's Your Biggest IT Challenge?</h2>
+            <p>Select your challenge and we'll recommend the right Arrow service</p>
+
+            <div class="dropdown">
+                <button class="dropdown-button" id="dropdownButton">
+                    <span id="selectedText">Select your challenge...</span>
+                    <span id="dropdownArrow">▼</span>
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <div class="dropdown-item" data-solution="managed">
+                        <div class="dropdown-item-title">Talent Shortage</div>
+                        <div class="dropdown-item-desc">Let Arrow manage your infrastructure so your team can focus on strategic initiatives</div>
+                    </div>
+                    <div class="dropdown-item" data-solution="support">
+                        <div class="dropdown-item-title">Vendor Complexity</div>
+                        <div class="dropdown-item-desc">Consolidate multi-vendor support with Arrow's unified helpdesk and engineering team</div>
+                    </div>
+                    <div class="dropdown-item" data-solution="adoption">
+                        <div class="dropdown-item-title">Budget Pressure</div>
+                        <div class="dropdown-item-desc">Optimize costs with Arrow's efficient project delivery and ongoing support</div>
+                    </div>
+                    <div class="dropdown-item" data-solution="managed">
+                        <div class="dropdown-item-title">Scaling Issues</div>
+                        <div class="dropdown-item-desc">Scale seamlessly with Arrow's tiered managed services approach</div>
+                    </div>
+                    <div class="dropdown-item" data-solution="adoption">
+                        <div class="dropdown-item-title">Migration Needs</div>
+                        <div class="dropdown-item-desc">Execute flawless migrations with Arrow's proven methodology and expert team</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recommendation-box" id="recommendationBox">
+                <div class="rec-icon">🎯</div>
+                <div class="rec-content">
+                    <h3 id="recTitle">Recommended Solution</h3>
+                    <p id="recDesc">Description will appear here</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="services-grid">
+            <!-- Support Services -->
+            <div class="service-card" id="support-services">
+                <div class="service-header">
+                    <div class="service-icon">🛡️</div>
+                    <div>
+                        <h3>Support Services</h3>
+                        <span class="persona-badge persona-hot">🔥 Hot Prospect</span>
+                    </div>
+                </div>
+                <p>Comprehensive L1-L4 technical support with 24/7 global coverage and multi-vendor expertise.</p>
+                
+                <ul class="service-features">
+                    <li>24/7/365 Global Coverage</li>
+                    <li>L1/L2 Helpdesk Support</li>
+                    <li>L3/L4 Engineering Support</li>
+                    <li>Multi-language Support (15+)</li>
+                    <li>Centralized Ticketing System</li>
+                    <li>Multi-vendor Expertise (50+)</li>
+                </ul>
+
+                <div class="probing-questions">
+                    <h4>Key Questions to Ask</h4>
+                    <ul>
+                        <li>How many support tickets do you handle monthly?</li>
+                        <li>Do you need 24/7 coverage?</li>
+                        <li>How many vendors do you support?</li>
+                        <li>What's your average resolution time?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Adoption Services -->
+            <div class="service-card" id="adoption-services">
+                <div class="service-header">
+                    <div class="service-icon">🚀</div>
+                    <div>
+                        <h3>Adoption Services</h3>
+                        <span class="persona-badge persona-medium">🟡 Medium Prospect</span>
+                    </div>
+                </div>
+                <p>Project delivery with ongoing support - Arrow stays after the project ends.</p>
+                
+                <ul class="service-features">
+                    <li>M&A Integration Services</li>
+                    <li>Cloud Migration Projects</li>
+                    <li>Data Center Relocation</li>
+                    <li>Platform Upgrades</li>
+                    <li>Design Thinking Workshops</li>
+                    <li>Technical Training Programs</li>
+                </ul>
+
+                <div class="probing-questions">
+                    <h4>Key Questions to Ask</h4>
+                    <ul>
+                        <li>Any M&A activity in next 12 months?</li>
+                        <li>Do you have upcoming migrations?</li>
+                        <li>What are your team's skill gaps?</li>
+                        <li>Need support after project completion?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Managed Services -->
+            <div class="service-card" id="managed-services">
+                <div class="service-header">
+                    <div class="service-icon">⚡</div>
+                    <div>
+                        <h3>Managed Services</h3>
+                        <span class="persona-badge persona-hot">🔥 Hot Prospect</span>
+                    </div>
+                </div>
+                <p>Three-tiered approach from monitoring to full lifecycle management.</p>
+                
+                <ul class="service-features">
+                    <li><strong>Tier 1:</strong> Monitoring & Alerting</li>
+                    <li><strong>Tier 2:</strong> Monitoring + Remediation</li>
+                    <li><strong>Tier 3:</strong> Full Lifecycle Management</li>
+                    <li>Automated Remediation</li>
+                    <li>Capacity Planning</li>
+                    <li>Strategic IT Planning</li>
+                </ul>
+
+                <div class="probing-questions">
+                    <h4>Key Questions to Ask</h4>
+                    <ul>
+                        <li>Overwhelmed by night/weekend alerts?</li>
+                        <li>Have resources for proactive maintenance?</li>
+                        <li>% of time spent on reactive work?</li>
+                        <li>Need help with capacity planning?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Arrow Lab Architecture Section -->
+    <section class="lab-architecture-section">
+        <div class="lab-container">
+            <div class="lab-header">
+                <h2>Arrow watsonx Lab Architecture</h2>
+                <p>Explore our interactive lab environment powered by IBM watsonx</p>
+            </div>
+            
+            <div class="lab-content">
+                <div class="lab-sidebar">
+                    <h3>Lab Components</h3>
+                    
+                    <div class="lab-legend">
+                        <div class="legend-item">
+                            <div class="legend-color ai-layer"></div>
+                            <span>AI/ML Layer</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color data-layer"></div>
+                            <span>Data Layer</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color governance-layer"></div>
+                            <span>Governance Layer</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color infrastructure-layer"></div>
+                            <span>Infrastructure</span>
+                        </div>
+                    </div>
+
+                    <div class="lab-info-panel" id="labInfoPanel">
+                        <h4>Lab Overview</h4>
+                        <p>Click on any component to learn about its role in the Arrow Lab environment.</p>
+                    </div>
+                </div>
+
+                <div class="lab-diagram">
+                    <div class="diagram-title">Arrow watsonx Lab Platform</div>
+                    
+                    <!-- Product Headers -->
+                    <div class="product-headers">
+                        <div class="product-header" data-product="governance">
+                            <span class="product-link">watsonx.governance</span>
+                        </div>
+                        <div class="product-header" data-product="ai">
+                            <span class="product-link">watsonx.ai</span>
+                        </div>
+                        <div class="product-header" data-product="data">
+                            <span class="product-link">watsonx.data</span>
+                        </div>
+                    </div>
+
+                    <!-- Foundation Models Layer -->
+                    <div class="layer models-layer">
+                        <div class="layer-label">Foundation Models</div>
+                        <div class="component-row">
+                            <div class="component ai-layer clickable" data-component="granite">
+                                <div class="component-title">IBM Granite Models</div>
+                                <div class="component-subtitle">Code, Language, Time Series</div>
+                            </div>
+                            <div class="component ai-layer clickable" data-component="llama">
+                                <div class="component-title">Llama 3.x Models</div>
+                                <div class="component-subtitle">8B, 70B, 405B variants</div>
+                            </div>
+                            <div class="component ai-layer clickable" data-component="mixtral">
+                                <div class="component-title">Mixtral Models</div>
+                                <div class="component-subtitle">8x7B, 8x22B MoE</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Studio Layer -->
+                    <div class="layer studio-layer">
+                        <div class="component-row">
+                            <div class="component ai-layer clickable full-width" data-component="studio">
+                                <div class="component-title">watsonx.ai Studio</div>
+                                <div class="component-subtitle">Prompt Lab | Tuning Studio | Flows Engine | Model Deployment</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Platform Layer -->
+                    <div class="layer data-platform-layer">
+                        <div class="component-row split">
+                            <div class="component data-layer clickable" data-component="lakehouse">
+                                <div class="component-title">Data Lakehouse</div>
+                                <div class="component-subtitle">Iceberg | Parquet | Delta Lake</div>
+                            </div>
+                            <div class="component data-layer clickable" data-component="query">
+                                <div class="component-title">Query Engine (Presto)</div>
+                                <div class="component-subtitle">Federated Queries | Multi-source</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Governance Layer -->
+                    <div class="layer governance-platform-layer">
+                        <div class="component-row">
+                            <div class="component governance-layer clickable" data-component="factsheets">
+                                <div class="component-title">AI Factsheets</div>
+                            </div>
+                            <div class="component governance-layer clickable" data-component="lifecycle">
+                                <div class="component-title">Model Lifecycle</div>
+                            </div>
+                            <div class="component governance-layer clickable" data-component="monitoring">
+                                <div class="component-title">Model Monitoring</div>
+                            </div>
+                            <div class="component governance-layer clickable" data-component="risk">
+                                <div class="component-title">Risk Management</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Infrastructure Layer -->
+                    <div class="layer infrastructure-platform-layer">
+                        <div class="component-row">
+                            <div class="component infrastructure-layer clickable" data-component="openshift">
+                                <div class="component-title">Red Hat OpenShift</div>
+                                <div class="component-subtitle">Container Orchestration | Kubernetes</div>
+                            </div>
+                        </div>
+                        <div class="component-row infrastructure-details">
+                            <div class="worker-node">
+                                <div class="node-title">Compute Node</div>
+                                <div class="gpu-container">
+                                    <div class="gpu ai-layer">GPU</div>
+                                    <div class="gpu ai-layer">GPU</div>
+                                    <div class="gpu ai-layer">GPU</div>
+                                    <div class="gpu ai-layer">GPU</div>
+                                </div>
+                            </div>
+                            <div class="worker-node">
+                                <div class="node-title">Compute Node</div>
+                                <div class="gpu-container">
+                                    <div class="gpu ai-layer">GPU</div>
+                                    <div class="gpu ai-layer">GPU</div>
+                                    <div class="gpu ai-layer">GPU</div>
+                                    <div class="gpu ai-layer">GPU</div>
+                                </div>
+                            </div>
+                            <div class="worker-node">
+                                <div class="node-title">Compute Node</div>
+                                <div class="gpu-container">
+                                    <div class="gpu data-layer">CPU</div>
+                                    <div class="gpu data-layer">CPU</div>
+                                    <div class="gpu data-layer">CPU</div>
+                                    <div class="gpu data-layer">CPU</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cloud Platform -->
+                    <div class="cloud-platform">
+                        <div class="platform-label">IBM Cloud | Hybrid Cloud Infrastructure</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Watson Orchestrate Chat Agent -->
+    <div id="root"></div>
+
+    <script>
+        // Dropdown functionality
+        const dropdownButton = document.getElementById('dropdownButton');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        const dropdownArrow = document.getElementById('dropdownArrow');
+        const selectedText = document.getElementById('selectedText');
+        const recommendationBox = document.getElementById('recommendationBox');
+        const recTitle = document.getElementById('recTitle');
+        const recDesc = document.getElementById('recDesc');
+
+        dropdownButton.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('active');
+            dropdownArrow.textContent = dropdownMenu.classList.contains('active') ? '▲' : '▼';
+        });
+
+        document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const title = item.querySelector('.dropdown-item-title').textContent;
+                const desc = item.querySelector('.dropdown-item-desc').textContent;
+                const solution = item.dataset.solution;
+
+                selectedText.textContent = title;
+                dropdownMenu.classList.remove('active');
+                dropdownArrow.textContent = '▼';
+
+                // Show recommendation
+                recTitle.textContent = `Recommended Solution: ${solution.charAt(0).toUpperCase() + solution.slice(1)} Services`;
+                recDesc.textContent = desc;
+                recommendationBox.classList.add('active');
+
+                // Highlight the service card
+                document.querySelectorAll('.service-card').forEach(card => {
+                    card.classList.remove('active');
+                });
+                const targetCard = document.getElementById(`${solution}-services`);
+                if (targetCard) {
+                    targetCard.classList.add('active');
+                    setTimeout(() => {
+                        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 100);
+                }
+            });
+        });
+
+        // Watson Orchestrate Chat Integration
+        window.wxOConfiguration = {
+            orchestrationID: "20250515-0817-2486-8019-c55acc2aa9da_20250515-1932-2867-306f-261f59b35842",
+            hostURL: "https://dl.watson-orchestrate.ibm.com",
+            rootElementID: "root",
+            chatOptions: {
+                agentId: "065faaf5-1a94-406b-a724-a0c6f1f2cdbf",
+                agentEnvironmentId: "d1e9b38e-67db-4e2c-9ad0-45e712e1f39c",
+            }
+        };
+        setTimeout(function () {
+            const script = document.createElement('script');
+            script.src = `${window.wxOConfiguration.hostURL}/wxochat/wxoLoader.js?embed=true`;
+            script.addEventListener('load', function () {
+                wxoLoader.init();
+            });
+            document.head.appendChild(script);
+        }, 0);
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!dropdownButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.classList.remove('active');
+                dropdownArrow.textContent = '▼';
+            }
+        });
+
+        // Lab Architecture Diagram Interactivity
+        const labComponentInfo = {
+            governance: {
+                title: "watsonx.governance",
+                description: "AI governance and risk management platform ensuring responsible, transparent, and explainable AI.",
+                points: [
+                    "Centralized governance hub for all AI assets",
+                    "Compliance-first architecture (EU AI Act, GDPR)",
+                    "Automated risk scoring and bias detection",
+                    "Complete audit trail for accountability"
+                ]
+            },
+            ai: {
+                title: "watsonx.ai",
+                description: "Enterprise AI studio for training, validating, tuning, and deploying foundation models.",
+                points: [
+                    "Model-agnostic platform prevents vendor lock-in",
+                    "Visual prompt engineering workspace",
+                    "Fine-tune models with your data privately",
+                    "Seamless production deployment with monitoring"
+                ]
+            },
+            data: {
+                title: "watsonx.data",
+                description: "Open, hybrid data store built on lakehouse architecture for AI workloads.",
+                points: [
+                    "Combines data lake flexibility with warehouse performance",
+                    "Query federation across multiple sources",
+                    "Apache Iceberg for vendor-neutral storage",
+                    "Separate compute from storage for cost optimization"
+                ]
+            },
+            granite: {
+                title: "IBM Granite Models",
+                description: "IBM's open-source foundation models trained on trusted enterprise data.",
+                points: [
+                    "Trained on curated, licensed data",
+                    "Optimized for code generation (116+ languages)",
+                    "Transparent training data provenance",
+                    "Efficient 3B-34B parameter models"
+                ]
+            },
+            llama: {
+                title: "Llama 3.x Models",
+                description: "Meta's open-source large language models in multiple sizes.",
+                points: [
+                    "Permissive licensing for commercial use",
+                    "Multiple sizes balance performance vs. cost",
+                    "Large developer community and ecosystem",
+                    "Pre-optimized instruction-tuned variants"
+                ]
+            },
+            mixtral: {
+                title: "Mixtral Models",
+                description: "Mixture-of-Experts models with sparse activation for efficiency.",
+                points: [
+                    "Only 2 of 8 experts activate per token",
+                    "75% compute reduction vs. dense models",
+                    "Specialized experts for different domains",
+                    "Faster inference than comparable models"
+                ]
+            },
+            studio: {
+                title: "watsonx.ai Studio",
+                description: "Integrated development environment for the entire AI lifecycle.",
+                points: [
+                    "Unified workspace reduces context switching",
+                    "Prompt Lab with version control and A/B testing",
+                    "Fine-tune with PEFT techniques (LoRA, QLoRA)",
+                    "Build complex workflows with RAG and agents"
+                ]
+            },
+            lakehouse: {
+                title: "Data Lakehouse",
+                description: "Open lakehouse combining flexibility of lakes with warehouse performance.",
+                points: [
+                    "Apache Iceberg for schema evolution",
+                    "ACID transactions for data consistency",
+                    "Time travel for historical queries",
+                    "Multi-format support (Parquet, Delta, Iceberg)"
+                ]
+            },
+            query: {
+                title: "Query Engine (Presto)",
+                description: "Distributed SQL engine for federated queries across data sources.",
+                points: [
+                    "Query data from PostgreSQL, S3, MongoDB, etc.",
+                    "Zero data movement reduces ETL complexity",
+                    "Massively parallel processing for speed",
+                    "Cost-based optimizer for optimal execution"
+                ]
+            },
+            factsheets: {
+                title: "AI Factsheets",
+                description: "Comprehensive documentation for AI models and their usage.",
+                points: [
+                    "Documents model lineage and limitations",
+                    "Meets regulatory documentation requirements",
+                    "Non-technical explanations for stakeholders",
+                    "Version control for audit trails"
+                ]
+            },
+            lifecycle: {
+                title: "Model Lifecycle Management",
+                description: "End-to-end tracking from development to retirement.",
+                points: [
+                    "Approval workflows and stage gates",
+                    "Version management with rollback",
+                    "CI/CD pipelines for deployment",
+                    "Systematic model decommissioning"
+                ]
+            },
+            monitoring: {
+                title: "Model Monitoring",
+                description: "Continuous monitoring for performance, drift, and fairness.",
+                points: [
+                    "Drift detection for data and predictions",
+                    "Performance tracking (accuracy, latency)",
+                    "Fairness metrics across protected attributes",
+                    "Proactive alerting for model issues"
+                ]
+            },
+            risk: {
+                title: "Risk Management",
+                description: "Automated risk assessment and mitigation for AI models.",
+                points: [
+                    "Multi-dimensional risk scoring",
+                    "Adversarial testing for vulnerabilities",
+                    "Concrete mitigation recommendations",
+                    "Compliance mapping to regulations"
+                ]
+            },
+            openshift: {
+                title: "Red Hat OpenShift",
+                description: "Enterprise Kubernetes platform for watsonx workloads.",
+                points: [
+                    "Industry-standard Kubernetes foundation",
+                    "Built-in RBAC and security scanning",
+                    "Hybrid cloud deployment consistency",
+                    "Intelligent GPU scheduling and auto-scaling"
+                ]
+            }
+        };
+
+        // Lab diagram click handlers
+        document.querySelectorAll('.lab-diagram .clickable').forEach(component => {
+            component.addEventListener('click', (e) => {
+                // Remove active class from all
+                document.querySelectorAll('.lab-diagram .component').forEach(c => {
+                    c.classList.remove('active');
+                });
+                
+                // Add active to clicked
+                e.currentTarget.classList.add('active');
+                
+                // Update info panel
+                const componentKey = e.currentTarget.dataset.component;
+                const info = labComponentInfo[componentKey];
+                
+                if (info) {
+                    updateLabInfoPanel(info);
+                }
+            });
+        });
+
+        // Product header click handlers
+        document.querySelectorAll('.lab-diagram .product-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const productType = e.currentTarget.closest('.product-header').dataset.product;
+                const info = labComponentInfo[productType];
+                
+                if (info) {
+                    updateLabInfoPanel(info);
+                }
+            });
+        });
+
+        function updateLabInfoPanel(info) {
+            const panel = document.getElementById('labInfoPanel');
+            
+            let pointsHTML = '';
+            if (info.points && info.points.length > 0) {
+                pointsHTML = '<ul>';
+                info.points.forEach(point => {
+                    pointsHTML += `<li>${point}</li>`;
+                });
+                pointsHTML += '</ul>';
+            }
+            
+            panel.innerHTML = `
+                <h4>${info.title}</h4>
+                <p>${info.description}</p>
+                ${pointsHTML}
+            `;
+        }
+
+        // Keyboard navigation for lab diagram
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.lab-diagram .component').forEach(c => {
+                    c.classList.remove('active');
+                });
+                
+                const panel = document.getElementById('labInfoPanel');
+                panel.innerHTML = `
+                    <h4>Lab Overview</h4>
+                    <p>Click on any component to learn about its role in the Arrow Lab environment.</p>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
