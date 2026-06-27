@@ -1,156 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="IBM Bob - Agentic SDLC partner and enterprise coding agent. Work directly inside codebases, terminals, and orchestration pipelines.">
-    <meta name="keywords" content="IBM Bob, AI, SDLC, agentic AI, enterprise coding, DevOps, infrastructure automation">
-    <meta property="og:title" content="IBM Bob | Agentic SDLC Partner">
-    <meta property="og:description" content="AI-powered Software Development Lifecycle partner built to work right alongside developers">
-    <meta property="og:url" content="https://bob.rcoace.com">
-    <meta name="twitter:card" content="summary_large_image">
-    <title>IBM Bob | Agentic SDLC Partner</title>
-    <link rel="stylesheet" href="css/main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="IBM Bob — Agentic SDLC partner. Real use cases from the Arrow Electronics Experience Center showing how IBM Bob accelerates engineering, planning, and deployment workflows.">
+  <title>IBM Bob | Agentic SDLC Partner — Arrow AEC</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f2137'/%3E%3Ctext x='50%25' y='22' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='14' fill='%230f62fe'%3EBob%3C/text%3E%3C/svg%3E">
+
+  <!-- Microsoft Clarity analytics -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xd7hddge48");
+  </script>
+
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <span class="logo-icon">🤖</span>
-                <h1>IBM Bob</h1>
-            </div>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#use-cases">Use Cases</a></li>
-                <li><a href="#capabilities">Agentic Modes</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <section class="hero">
-            <h1>IBM Bob</h1>
-            <p class="tagline">Agentic SDLC Partner & Enterprise Coding Agent</p>
-            <p class="description">
-                IBM Bob is an AI-powered Software Development Lifecycle partner built to work right alongside developers—directly
-                inside codebases, terminals, and orchestration pipelines. Bob balances technical rigor with enterprise clarity,
-                understanding system architecture, dependencies, security-first constraints, and deployment integrity across the
-                complete SDLC: /ask, /plan, /code, and /review.
-            </p>
-            <div class="cta-buttons">
-                <a href="#use-cases" class="btn btn-primary">View Use Cases</a>
-                <a href="https://bob.ibm.com" target="_blank" class="btn btn-secondary">Learn More at bob.ibm.com →</a>
-            </div>
-        </section>
+<!-- ═══════════════════════════════════════════════════════════ NAV -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <svg class="nav-logo-svg" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="IBM Bob logo">
+          <rect width="36" height="36" rx="7" fill="#0f2137"/>
+          <rect x="1" y="1" width="34" height="34" rx="6" stroke="#0f62fe" stroke-width="1.5"/>
+          <text x="18" y="25" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-weight="700" font-size="13" fill="#0f62fe">Bob</text>
+        </svg>
+        <span class="nav-wordmark">IBM <span>Bob</span></span>
+      </div>
+      <div class="nav-links">
+        <a href="#use-cases">Use Cases</a>
+        <a href="#modes">Agentic Modes</a>
+        <a href="#about">About Bob</a>
+        <a href="https://rcoace.com" class="nav-back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          R Co
+        </a>
+      </div>
+      <a href="#use-cases" class="nav-cta">Use Cases →</a>
+    </div>
+  </div>
+</nav>
 
-        <section id="use-cases" class="demos">
-            <h2>Use Cases</h2>
-            <div class="demo-grid">
-                <div class="demo-card">
-                    <div class="demo-icon">🚀</div>
-                    <h3>Infrastructure Automation</h3>
-                    <p>RHEL jump host on IBM Fusion HCI with Red Hat OpenShift Virtualization - automated deployment with DNS, MetalLB, and Active Directory integration.</p>
-                    <a href="demos/infrastructure-automation.html" class="btn">View Use Case →</a>
-                </div>
-                <div class="demo-card">
-                    <div class="demo-icon">🔐</div>
-                    <h3>Quantum-Safe POC Environment</h3>
-                    <p>Rapid deployment of enterprise quantum-safe cryptography evaluation infrastructure - 23 minutes vs 6-8 weeks external delivery. Strategic advantage for IBM and Arrow Business Partners.</p>
-                    <a href="demos/quantum-safe-poc.html" class="btn">View Use Case →</a>
-                </div>
-                <div class="demo-card">
-                    <div class="demo-icon">🌐</div>
-                    <h3>Project Atlas: Multi-Cloud Fabric</h3>
-                    <p>Automated multi-cloud infrastructure deployment across AWS, Azure, and vCenter with HashiCorp Vault integration and Ansible configuration management.</p>
-                    <a href="demos/project-atlas.html" class="btn">View Use Case →</a>
-                </div>
-                <div class="demo-card">
-                    <div class="demo-icon">🤖</div>
-                    <h3>Arrow Services Navigator</h3>
-                    <p>AI-powered RAG application with IBM watsonx.ai helping partners discover and recommend Arrow's technical services through intelligent conversation.</p>
-                    <a href="demos/arrow-services-navigator.html" class="btn">View Use Case →</a>
-                </div>
-            </div>
-        </section>
+<!-- ═══════════════════════════════════════════════════════════ HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-copy">
+      <div class="hero-tag">Arrow Electronics Experience Center</div>
+      <h1 class="hero-title">
+        IBM <span class="accent">Bob</span> —<br>
+        Your Agentic SDLC Partner
+      </h1>
+      <p class="hero-desc">
+        IBM Bob is an AI-powered Software Development Lifecycle partner built to work
+        right alongside engineers — directly inside codebases, terminals, and orchestration
+        pipelines. Bob balances technical rigor with enterprise clarity: understanding
+        architecture, dependencies, and deployment integrity across the complete SDLC.
+      </p>
+      <div class="hero-actions">
+        <a href="#use-cases" class="btn-primary">See Real Use Cases</a>
+        <a href="https://bob.ibm.com" target="_blank" rel="noopener" class="btn-ghost">bob.ibm.com →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <section id="capabilities" class="capabilities">
-            <h2>Agentic Modes</h2>
-            <div class="capability-grid">
-                <div class="capability">
-                    <div class="icon">🔍</div>
-                    <h3>/ask Mode</h3>
-                    <p>Exploration and discovery - analyze codebases, understand architecture, investigate issues</p>
-                </div>
-                <div class="capability">
-                    <div class="icon">📋</div>
-                    <h3>/plan Mode</h3>
-                    <p>Strategic planning - design solutions, create implementation roadmaps, architect systems</p>
-                </div>
-                <div class="capability">
-                    <div class="icon">⚡</div>
-                    <h3>/code Mode</h3>
-                    <p>Direct implementation - write code, modify files, execute commands, deploy infrastructure</p>
-                </div>
-                <div class="capability">
-                    <div class="icon">✅</div>
-                    <h3>/review Mode</h3>
-                    <p>Quality assurance - code review, security analysis, compliance validation, best practices</p>
-                </div>
-                <div class="capability">
-                    <div class="icon">🔐</div>
-                    <h3>Security-First</h3>
-                    <p>Enterprise-grade security with Vault integration, zero-trust architecture, compliance-aware</p>
-                </div>
-                <div class="capability">
-                    <div class="icon">🏗️</div>
-                    <h3>Architecture-Aware</h3>
-                    <p>Understands enterprise patterns, multi-cloud fabrics, orchestration pipelines, GitOps workflows</p>
-                </div>
-            </div>
-        </section>
+<!-- ═══════════════════════════════════════════════════════ USE CASES -->
+<section class="section section-alt" id="use-cases">
+  <div class="container">
+    <p class="section-title">Use Cases</p>
+    <div class="divider"></div>
+    <p class="section-sub">Real work, real results — IBM Bob in action at the Arrow Electronics Experience Center and beyond.</p>
+    <div class="showcase-grid">
 
-        <section id="about" class="about">
-            <h2>About IBM Bob</h2>
-            <div class="about-content">
-                <p>
-                    IBM Bob is an agentic SDLC partner built to work alongside developers throughout the entire
-                    software development lifecycle. Operating directly inside codebases, terminals, and orchestration
-                    pipelines, Bob provides architecture-aware assistance for enterprise environments. From rapid POC
-                    deployment to production-grade infrastructure automation, Bob delivers security-first solutions
-                    that align with enterprise constraints and compliance requirements.
-                </p>
-                <p style="margin-top: 1rem;">
-                    Deployed at the <strong>Arrow Experience Center (AEC)</strong>, Bob showcases real-world enterprise
-                    capabilities including multi-cloud fabric orchestration, quantum-safe cryptography deployment,
-                    and automated infrastructure provisioning across hybrid environments.
-                </p>
-                <div class="stats">
-                    <div class="stat">
-                        <div class="stat-number">4</div>
-                        <div class="stat-label">Agentic Modes</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">23min</div>
-                        <div class="stat-label">POC Deploy</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">∞</div>
-                        <div class="stat-label">Enterprise Scale</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 IBM Bob | Agentic SDLC Partner | Deployed at Arrow Experience Center</p>
-        <div class="footer-links">
-            <a href="https://bob.ibm.com" target="_blank">IBM Bob Official Site</a>
-            <a href="#use-cases">Use Cases</a>
-            <a href="#capabilities">Agentic Modes</a>
+      <!-- ① Getting Organized for Bob with Bob (FEATURED) -->
+      <div class="showcase-card">
+        <div class="sc-header">
+          <div class="sc-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 7h18M3 12h18M3 17h18" stroke="#00b4d8" stroke-width="2" stroke-linecap="round"/><rect x="1" y="3" width="22" height="18" rx="3" stroke="#00b4d8" stroke-width="1.5"/></svg>
+          </div>
+          <span class="sc-badge badge-case">Case Study</span>
         </div>
-    </footer>
+        <div class="sc-title">Getting Organized for Bob with Bob</div>
+        <div class="sc-desc">How Bob was used as both a <strong>planning and execution partner</strong> to reorganize a sprawling digital workspace, migrate everything to GitHub, then rebuild rcoace.com into a 7-program AEC showcase — all in a single evening.</div>
+        <div class="sc-contributor">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <a href="https://www.linkedin.com/in/frankwelder/" target="_blank" rel="noopener">Frank Welder</a>
+          · Arrow AEC
+        </div>
+        <a href="demos/getting-organized.html" class="sc-link">
+          Read the case study
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
 
-    <script src="js/main.js"></script>
+      <!-- ② Infrastructure Automation -->
+      <div class="showcase-card">
+        <div class="sc-header">
+          <div class="sc-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#00b4d8" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="#00b4d8" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <span class="sc-badge badge-live">Live</span>
+        </div>
+        <div class="sc-title">Infrastructure Automation</div>
+        <div class="sc-desc">RHEL jump host on <strong>IBM Fusion HCI</strong> with Red Hat OpenShift Virtualization — automated deployment with DNS, MetalLB, and Active Directory integration. Bob drove the full provisioning sequence.</div>
+        <div class="sc-contributor">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <a href="https://www.linkedin.com/in/frankwelder/" target="_blank" rel="noopener">Frank Welder</a>
+          · Arrow AEC
+        </div>
+        <a href="demos/infrastructure-automation.html" class="sc-link">
+          View use case
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- ③ Quantum-Safe POC -->
+      <div class="showcase-card">
+        <div class="sc-header">
+          <div class="sc-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#00b4d8" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#00b4d8" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <span class="sc-badge badge-live">Live</span>
+        </div>
+        <div class="sc-title">Quantum-Safe POC Environment</div>
+        <div class="sc-desc">Rapid deployment of enterprise quantum-safe cryptography evaluation infrastructure — <strong>23 minutes vs 6–8 weeks</strong> external delivery. Strategic advantage for IBM and Arrow Business Partners.</div>
+        <div class="sc-contributor">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <a href="https://www.linkedin.com/in/frankwelder/" target="_blank" rel="noopener">Frank Welder</a>
+          · Arrow AEC
+        </div>
+        <a href="demos/quantum-safe-poc.html" class="sc-link">
+          View use case
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- ④ Project Atlas -->
+      <div class="showcase-card">
+        <div class="sc-header">
+          <div class="sc-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><polygon points="12,2 2,7 2,17 12,22 22,17 22,7" stroke="#00b4d8" stroke-width="2" stroke-linejoin="round"/><line x1="12" y1="2" x2="12" y2="22" stroke="#00b4d8" stroke-width="1.5"/><line x1="2" y1="7" x2="22" y2="7" stroke="#00b4d8" stroke-width="1.5"/><line x1="2" y1="17" x2="22" y2="17" stroke="#00b4d8" stroke-width="1.5"/></svg>
+          </div>
+          <span class="sc-badge badge-live">Live</span>
+        </div>
+        <div class="sc-title">Project Atlas: Multi-Cloud Fabric</div>
+        <div class="sc-desc">Automated multi-cloud infrastructure deployment across AWS, Azure, and vCenter with <strong>HashiCorp Vault</strong> integration and Ansible configuration management — orchestrated end-to-end by Bob.</div>
+        <div class="sc-contributor">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <a href="https://www.linkedin.com/in/frankwelder/" target="_blank" rel="noopener">Frank Welder</a>
+          · Arrow AEC
+        </div>
+        <a href="demos/project-atlas.html" class="sc-link">
+          View use case
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- ⑤ Arrow Services Navigator -->
+      <div class="showcase-card">
+        <div class="sc-header">
+          <div class="sc-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#0f62fe" stroke-width="2"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" stroke="#0f62fe" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <span class="sc-badge badge-team">Arrow AEC Team</span>
+        </div>
+        <div class="sc-title">Arrow Services Navigator</div>
+        <div class="sc-desc">AI-powered RAG application with <strong>IBM watsonx.ai</strong> helping partners discover and recommend Arrow's technical services through intelligent conversation — built to scale partner enablement.</div>
+        <div class="sc-contributor">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Omar Farid &amp; Christopher Phipps · Arrow AEC
+        </div>
+        <a href="demos/arrow-services-navigator.html" class="sc-link">
+          View use case
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ AGENTIC MODES -->
+<section class="section" id="modes">
+  <div class="container">
+    <p class="section-title">Agentic Modes</p>
+    <div class="divider"></div>
+    <p class="section-sub">IBM Bob operates across the full SDLC — from codebase exploration to live deployment — through four core modes.</p>
+    <div class="modes-grid">
+
+      <div class="mode-card">
+        <div class="mode-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="#0f62fe" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="#0f62fe" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="mode-label">/ask</div>
+        <h3>Ask Mode</h3>
+        <p>Exploration and discovery — analyze codebases, understand architecture, investigate issues. Bob reads widely before acting.</p>
+      </div>
+
+      <div class="mode-card">
+        <div class="mode-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="#0f62fe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="mode-label">/plan</div>
+        <h3>Plan Mode</h3>
+        <p>Strategic planning — design solutions, create implementation roadmaps, present architectural options with trade-offs. Bob recommends; you decide.</p>
+      </div>
+
+      <div class="mode-card">
+        <div class="mode-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#0f62fe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="mode-label">/agent</div>
+        <h3>Agent Mode</h3>
+        <p>Direct implementation — write code, modify files, execute commands, deploy infrastructure. Bob works autonomously through complex multi-step tasks.</p>
+      </div>
+
+      <div class="mode-card">
+        <div class="mode-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" stroke="#0f62fe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="mode-label">/review</div>
+        <h3>Review Mode</h3>
+        <p>Quality assurance — code review, security analysis, compliance validation, and best practices. Bob verifies before you ship.</p>
+      </div>
+
+      <div class="mode-card">
+        <div class="mode-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#0f62fe" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#0f62fe" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="mode-label">Security-First</div>
+        <h3>Security-First</h3>
+        <p>Enterprise-grade security with Vault integration, zero-trust architecture, and compliance-aware engineering built into every recommendation.</p>
+      </div>
+
+      <div class="mode-card">
+        <div class="mode-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><polygon points="12,2 2,7 2,17 12,22 22,17 22,7" stroke="#0f62fe" stroke-width="2" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="mode-label">Architecture-Aware</div>
+        <h3>Architecture-Aware</h3>
+        <p>Understands enterprise patterns, multi-cloud fabrics, orchestration pipelines, and GitOps workflows — not just individual files.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ ABOUT -->
+<section class="section section-alt" id="about">
+  <div class="container">
+    <p class="section-title">About IBM Bob</p>
+    <div class="divider"></div>
+    <p class="section-sub">IBM Bob is an agentic SDLC partner built for enterprise environments — from rapid POC deployment to production-grade infrastructure automation.</p>
+    <p style="font-size:14px; color:var(--muted); max-width:680px; line-height:1.8; margin-bottom:24px;">
+      Operating directly inside codebases, terminals, and orchestration pipelines, Bob provides architecture-aware assistance across the complete software development lifecycle. Bob balances technical rigor with enterprise clarity — understanding system dependencies, security constraints, and deployment integrity at every step.
+    </p>
+    <p style="font-size:14px; color:var(--muted); max-width:680px; line-height:1.8;">
+      The use cases on this site are <strong style="color:var(--light);">real work from the Arrow Electronics Experience Center</strong> — not demos, not hypotheticals. Each one represents a problem Bob helped solve alongside an Arrow AEC engineer.
+    </p>
+    <div style="margin-top:32px; display:flex; gap:14px; flex-wrap:wrap;">
+      <a href="https://bob.ibm.com" target="_blank" rel="noopener" class="btn-primary">Learn more at bob.ibm.com</a>
+      <a href="https://rcoace.com" class="btn-ghost">← Back to R Co</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <svg width="32" height="32" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="7" fill="#0f2137"/><rect x="1" y="1" width="34" height="34" rx="6" stroke="#0f62fe" stroke-width="1.5"/><text x="18" y="25" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-weight="700" font-size="13" fill="#0f62fe">Bob</text></svg>
+          <span class="nav-wordmark" style="font-size:18px;">IBM <span>Bob</span></span>
+        </div>
+        <p style="margin-top:10px;">Agentic SDLC partner.<br>Real use cases from the Arrow AEC.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Use Cases</h4>
+        <ul>
+          <li><a href="demos/getting-organized.html">Getting Organized with Bob</a></li>
+          <li><a href="demos/infrastructure-automation.html">Infrastructure Automation</a></li>
+          <li><a href="demos/quantum-safe-poc.html">Quantum-Safe POC</a></li>
+          <li><a href="demos/project-atlas.html">Project Atlas</a></li>
+          <li><a href="demos/arrow-services-navigator.html">Arrow Services Navigator</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>R Co Ecosystem</h4>
+        <ul>
+          <li><a href="https://rcoace.com">rcoace.com</a></li>
+          <li><a href="https://rcoace.com/qforge/">Q-Forge GCM Docs</a></li>
+          <li><a href="https://github.com/ftw-arrow">GitHub — ftw-arrow</a></li>
+          <li><a href="https://bob.ibm.com" target="_blank" rel="noopener">bob.ibm.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Arrow Electronics Experience Center · Frank Welder</span>
+      <span>Powered by <a href="https://bob.ibm.com" target="_blank" rel="noopener">IBM Bob</a> &nbsp;·&nbsp; Hosted on <a href="https://azure.microsoft.com/en-us/products/app-service/static" target="_blank" rel="noopener">Azure Static Web Apps</a></span>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
