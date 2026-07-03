@@ -207,7 +207,7 @@ CTA BAR
 FOOTER
   Contributor: Frank Welder · Arrow Electronics AEC
   LinkedIn: https://www.linkedin.com/in/frankwelder/
-  © 2026 R Co — Arrow Electronics Experience Center
+  © 2026 R Co — Arrow Capability Engine (ACE)
 ```
 
 **"Bob's Decision" callout block HTML pattern:**
