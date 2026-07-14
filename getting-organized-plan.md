@@ -87,7 +87,7 @@ For cards without confirmed LinkedIn: plain text name only.
 
 **Relevant Context**
 - Existing index: `gh api "repos/ftw-arrow/bob-showcase/contents/src/index.html"`
-- rcoace.com design: `development/websites/rcoace-root/index.html`
+- rcoace.com design: `publishing/websites/rcoace-root/index.html`
 - CSS variables: `--navy:#0f2137`, `--cyan:#00b4d8`, `--muted:#8eafc4`, `--ibm-blue:#0f62fe`
 
 **Status:** `[ ] pending`
@@ -137,7 +137,7 @@ PHASE 1 — The Workspace Reorganization
 
   [BOB'S DECISION CALLOUT — "The Architecture Proposal"]
     The moment: Frank asked Bob to help organize the workspace.
-    What Bob did: Proposed a clean top-level hierarchy — programs/, development/,
+    What Bob did: Proposed a clean top-level hierarchy — programs/, publishing/,
     infrastructure/, documentation/ — with a rationale for each. Then executed
     the reorganization: moved files, initialized the git repo, set up the GitHub
     remote, and resolved the initial staging state.
@@ -229,9 +229,9 @@ FOOTER
 Style: left border 3px cyan, background `rgba(0,180,216,.06)`, padding 20px 24px, border-radius 8px.
 
 **Relevant Context**
-- rcoace.com program page layout: `development/websites/rcoace-root/programs/atlas.html`
-- deploy.sh Bob wrote: `development/websites/rcoace-root/deploy.sh`
-- staticwebapp.config.json: `development/websites/rcoace-root/staticwebapp.config.json`
+- rcoace.com program page layout: `publishing/websites/rcoace-root/programs/atlas.html`
+- deploy.sh Bob wrote: `publishing/websites/rcoace-root/deploy.sh`
+- staticwebapp.config.json: `publishing/websites/rcoace-root/staticwebapp.config.json`
 
 **Status:** `[ ] pending`
 
@@ -259,7 +259,7 @@ Clone the bob-showcase repo, copy the 3 changed/new files, commit, push. Watch A
 **Relevant Context**
 - Repo: `https://github.com/ftw-arrow/bob-showcase.git`
 - SWA: `thankful-dune-02774970f` · resource group: `rg-bob-showcase`
-- Staging files will be written to `development/websites/bob-showcase/src/` first (for git tracking in aec-workspace), then copied to the deploy clone
+- Staging files will be written to `publishing/websites/bob-showcase/src/` first (for git tracking in aec-workspace), then copied to the deploy clone
 
 **Status:** `[ ] pending`
 
