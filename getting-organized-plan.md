@@ -229,7 +229,7 @@ FOOTER
 Style: left border 3px cyan, background `rgba(0,180,216,.06)`, padding 20px 24px, border-radius 8px.
 
 **Relevant Context**
-- rcoace.com program page layout: `publishing/websites/rcoace-root/programs/atlas.html`
+- rcoace.com program page layout: `publishing/websites/rcoace-root/projects/programs/atlas.html`
 - deploy.sh Bob wrote: `publishing/websites/rcoace-root/deploy.sh`
 - staticwebapp.config.json: `publishing/websites/rcoace-root/staticwebapp.config.json`
 
