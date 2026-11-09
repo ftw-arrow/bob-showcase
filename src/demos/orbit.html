@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORBIT — Microsoft Copilot + watsonx Orchestrate · Arrow Play Briefing</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --msft:#0078d4;--msft-l:#deecf9;
+    --ibm:#0f62fe;--ibm-d:#0043ce;--ibm-l:#edf5ff;
+    --g100:#161616;--g90:#262626;--g80:#393939;--g70:#525252;
+    --g50:#8d8d8d;--g30:#c6c6c6;--g20:#e0e0e0;--g10:#f4f4f4;
+    --w:#ffffff;
+    --grn:#24a148;--grn-l:#defbe6;
+    --ylw:#f1c21b;--ylw-l:#fcf4d6;
+    --red:#da1e28;--red-l:#fff1f1;
+    --pur:#6929c4;--pur-l:#f6f2ff;
+    --tel:#009d9a;--tel-l:#d9fbfb;
+    --bdr:#e0e0e0;
+  }
+  body{font-family:'IBM Plex Sans',-apple-system,sans-serif;font-size:14px;line-height:1.65;color:var(--g100);background:var(--g10);min-height:100vh}
+  /* MASTHEAD */
+  .mh{background:var(--g100);border-bottom:3px solid var(--ibm)}
+  .mh-i{max-width:1200px;margin:0 auto;padding:1.75rem 2rem 0}
+  .mh-ey{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g50);margin-bottom:.4rem}
+  .mh-brands{display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem;flex-wrap:wrap}
+  .chip{display:inline-flex;align-items:center;padding:3px 10px;border-radius:100px;font-size:12px;font-weight:600}
+  .chip-m{background:rgba(0,120,212,.2);border:1px solid rgba(0,120,212,.4);color:#74b9f7}
+  .chip-i{background:rgba(15,98,254,.2);border:1px solid rgba(15,98,254,.4);color:#82a9ff}
+  .chip-a{background:rgba(36,161,72,.2);border:1px solid rgba(36,161,72,.4);color:#6ee09b}
+  .chip-o{background:rgba(249,168,37,.2);border:1px solid rgba(249,168,37,.4);color:#fbbf24}
+  .mh-title{font-size:clamp(1.4rem,3vw,2.1rem);font-weight:700;color:var(--w);letter-spacing:-.01em;line-height:1.2;margin-bottom:.25rem}
+  .mh-title .mw{color:#74b9f7}.mh-title .ow{color:#fbbf24}.mh-title .iw{color:#82a9ff}
+  .mh-sub{font-size:13px;color:var(--g50);margin-bottom:1rem;font-weight:300}
+  .mh-status{display:flex;gap:1.5rem;flex-wrap:wrap;padding-bottom:0}
+  .pip{display:flex;align-items:center;gap:.4rem;font-size:11px;color:var(--g50)}
+  .pd{width:6px;height:6px;border-radius:50%;background:var(--grn);flex-shrink:0}
+  .pd.w{background:var(--ylw)}.pd.r{background:var(--red)}
+  /* TABS */
+  .tb{background:var(--g90);border-bottom:1px solid rgba(255,255,255,.08);margin-top:1rem}
+  .tb-i{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+  .tb-i::-webkit-scrollbar{display:none}
+  .tab{padding:.85rem 1.2rem;font-size:12.5px;font-weight:500;color:var(--g50);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s;font-family:inherit}
+  .tab:hover{color:var(--g20)}
+  .tab.on{color:var(--w);border-bottom-color:var(--ibm)}
+  .tn{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:50%;font-size:10px;font-weight:700;margin-right:.35rem;background:rgba(255,255,255,.08);color:var(--g50);transition:background .15s,color .15s}
+  .tab.on .tn{background:var(--ibm);color:var(--w)}
+  /* PANELS */
+  .pnl{display:none}.pnl.on{display:block}
+  .pb{max-width:1200px;margin:0 auto;padding:2rem 2rem 4rem}
+  /* SECTION */
+  .sec{margin-bottom:2.5rem}
+  .sh{display:flex;align-items:center;gap:.65rem;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--ibm)}
+  .sd{width:10px;height:10px;border-radius:50%;background:var(--ibm);flex-shrink:0}
+  .sd.m{background:var(--msft)}.sd.g{background:var(--grn)}.sd.r{background:var(--red)}.sd.p{background:var(--pur)}.sd.t{background:var(--tel)}.sd.o{background:#f59e0b}
+  .st{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--g100)}
+  /* CARDS */
+  .cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
+  .cg4{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
+  .card{background:var(--w);border:1px solid var(--bdr);border-radius:4px;padding:1.25rem 1.5rem}
+  .ct{font-size:13px;font-weight:700;margin-bottom:.4rem}
+  .cb{font-size:12.5px;color:var(--g70);line-height:1.65}
+  /* HERO */
+  .hero{background:var(--g100);border-radius:6px;padding:2rem 2.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 15% 50%,rgba(15,98,254,.18) 0%,transparent 55%),radial-gradient(ellipse at 80% 40%,rgba(245,158,11,.1) 0%,transparent 55%);pointer-events:none}
+  .h-ey{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.5rem}
+  .h-q{font-size:clamp(.95rem,2vw,1.15rem);font-weight:300;line-height:1.8;color:rgba(255,255,255,.88);max-width:840px}
+  .h-q em{font-style:italic;color:rgba(255,255,255,.5)}
+  .h-q strong{font-style:normal;color:#fbbf24;font-weight:600}
+  /* ORBIT CALLOUT */
+  .orbit-box{background:var(--g90);border:1px solid rgba(245,158,11,.35);border-left:4px solid #f59e0b;border-radius:4px;padding:1.25rem 1.5rem;margin-bottom:1rem}
+  .orbit-box-title{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#fbbf24;margin-bottom:.5rem}
+  .orbit-box-body{font-size:13px;color:rgba(255,255,255,.75);line-height:1.7}
+  .orbit-box-body strong{color:var(--w)}
+  /* STRIP */
+  .strip{background:var(--w);border:1px solid var(--bdr);border-left:4px solid var(--ibm);border-radius:0 4px 4px 0;padding:1rem 1.5rem;font-size:13.5px;color:var(--g70);line-height:1.7;margin-bottom:1rem}
+  .strip strong{color:var(--g100)}
+  /* ARCH */
+  .arch{background:var(--g100);border-radius:6px;padding:1.75rem 2rem}
+  .arch-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1rem}
+  .arch-row{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+  .an{flex:1;min-width:130px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1rem .9rem;text-align:center}
+  .an.cop{border-color:rgba(0,120,212,.5);background:rgba(0,120,212,.1)}
+  .an.orb{border-color:rgba(245,158,11,.5);background:rgba(245,158,11,.08)}
+  .an.ari{border-color:rgba(36,161,72,.4);background:rgba(36,161,72,.06)}
+  .an.m365{border-color:rgba(255,255,255,.15)}
+  .an.jso{border-color:rgba(255,255,255,.08);background:rgba(255,255,255,.02)}
+  .aa{display:flex;align-items:center;padding:0 .5rem;color:rgba(255,255,255,.2);font-size:1.2rem;flex-shrink:0}
+  .an-tag{font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-bottom:3px}
+  .cop .an-tag{color:#74b9f7}.orb .an-tag{color:#fbbf24}.ari .an-tag{color:#6ee09b}
+  .an-name{font-size:12px;font-weight:700;color:var(--w);margin-bottom:3px;line-height:1.3}
+  .an-desc{font-size:10.5px;color:rgba(255,255,255,.4);line-height:1.4}
+  .jso .an-name{color:rgba(255,255,255,.5);font-size:11px}
+  .jso .an-desc{font-size:10px}
+  .arch-note{font-size:11px;color:rgba(255,255,255,.25);text-align:center;margin-top:.75rem;font-style:italic}
+  .live-tag{display:inline-block;font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;background:rgba(36,161,72,.25);color:#6ee09b;border:1px solid rgba(36,161,72,.3);margin-bottom:3px}
+  .mock-tag{display:inline-block;font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.1);margin-bottom:3px}
+  /* SCENARIO CARDS */
+  .sc{background:var(--w);border:1px solid var(--bdr);border-radius:4px;overflow:hidden;margin-bottom:1rem}
+  .sc-hd{padding:1rem 1.5rem;border-bottom:1px solid var(--g10);display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .sc-num{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-bottom:2px}
+  .sc-title{font-size:15px;font-weight:700}
+  .sc-tag{font-size:12px;color:var(--g70);margin-top:2px}
+  .sc-bd{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;padding:1.25rem 1.5rem}
+  @media(max-width:700px){.sc-bd{grid-template-columns:1fr}}
+  .sc-lbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem}
+  .prompt{background:#f0f7ff;border:1px solid #c5dff8;border-left:3px solid var(--msft);border-radius:0 3px 3px 0;padding:.75rem 1rem;font-size:12px;font-style:italic;color:var(--g80);line-height:1.55}
+  .outcome{font-size:12.5px;color:var(--g70);line-height:1.65}
+  .outcome strong{color:var(--g100);font-size:11px}
+  .sc-proof{margin-top:.9rem;padding-top:.75rem;border-top:1px solid var(--g10);font-size:11.5px;color:var(--g70);font-style:italic;line-height:1.6;grid-column:1/-1}
+  .sc-proof strong{font-style:normal;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g50)}
+  .sc-json{background:var(--g100);border-radius:3px;padding:.5rem .75rem;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#a8d1ff;margin-top:.6rem;line-height:1.6}
+  .json-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.3);margin-bottom:2px}
+  .aud-badge{display:inline-block;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;background:var(--g10);color:var(--g70);padding:3px 8px;border-radius:3px}
+  /* BADGE */
+  .bdg{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;white-space:nowrap}
+  .bg{background:var(--grn-l);color:var(--grn)}
+  .by{background:var(--ylw-l);color:#8a6901}
+  .bb{background:var(--ibm-l);color:var(--ibm-d)}
+  .br{background:var(--red-l);color:var(--red)}
+  .bp{background:var(--pur-l);color:var(--pur)}
+  .bt{background:var(--tel-l);color:var(--tel)}
+  .bo{background:#fffbeb;color:#92400e}
+  .bgr{background:var(--g10);color:var(--g70)}
+  .bm{background:var(--msft-l);color:var(--msft)}
+  /* TABLES */
+  .tw{overflow-x:auto;background:var(--w);border:1px solid var(--bdr);border-radius:4px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  thead th{background:var(--g100);color:var(--w);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:9px 12px;text-align:left;white-space:nowrap}
+  tbody tr:nth-child(even){background:var(--g10)}
+  tbody tr:hover{background:var(--ibm-l)}
+  tbody td{padding:8px 12px;vertical-align:top;border-bottom:1px solid var(--bdr)}
+  tbody tr:last-child td{border-bottom:none}
+  /* OBJ */
+  .obj{background:var(--w);border:1px solid var(--bdr);border-radius:4px;margin-bottom:.75rem}
+  .obj-q{background:var(--g10);padding:.7rem 1.25rem;font-size:13px;font-weight:700;border-bottom:1px solid var(--bdr);border-radius:4px 4px 0 0}
+  .obj-a{padding:.9rem 1.25rem;font-size:12.5px;color:var(--g70);line-height:1.7;font-style:italic}
+  .obj-a strong{font-style:normal;color:var(--g100)}
+  /* TIMELINE */
+  .tl{background:var(--w);border:1px solid var(--bdr);border-radius:4px}
+  .tl-r{display:flex;align-items:flex-start;gap:1rem;padding:.65rem 1.25rem;border-bottom:1px solid var(--g10)}
+  .tl-r:last-child{border-bottom:none}
+  .tld{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px}
+  .tld.g{background:var(--grn)}.tld.y{background:var(--ylw)}.tld.b{background:var(--ibm)}
+  .tlw{font-size:11px;font-weight:700;color:var(--g70);min-width:105px;flex-shrink:0}
+  .tlx{font-size:12.5px;color:var(--g70)}
+  /* CHECKLIST */
+  .ck{background:var(--w);border:1px solid var(--bdr);border-radius:4px;padding:1rem 1.25rem;list-style:none}
+  .ck li{display:flex;align-items:flex-start;gap:.6rem;padding:.45rem 0;border-bottom:1px solid var(--g10);font-size:13px}
+  .ck li:last-child{border-bottom:none}
+  .cb2{width:15px;height:15px;border:2px solid var(--g30);border-radius:2px;flex-shrink:0;margin-top:2px}
+  .cb2.y{border-color:var(--ylw)}
+  .ckt{color:var(--g80)}
+  .cks{font-size:11px;color:var(--g50);display:block;margin-top:2px}
+  /* CODE */
+  code{font-family:'IBM Plex Mono',monospace;font-size:11.5px;background:var(--g10);border:1px solid var(--bdr);padding:1px 5px;border-radius:2px;color:var(--g80)}
+  .cblk{font-family:'IBM Plex Mono',monospace;font-size:11.5px;background:var(--g100);color:#a8d1ff;border-radius:4px;padding:.75rem 1rem;overflow-x:auto;white-space:pre;line-height:1.7;margin:.4rem 0}
+  /* CALLOUT */
+  .cl{padding:.9rem 1.2rem;border-radius:4px;font-size:13px;margin-bottom:1rem}
+  .cly{background:var(--ylw-l);border:1px solid var(--ylw)}
+  .clr{background:var(--red-l);border:1px solid #ffa4a9}
+  .clb{background:var(--ibm-l);border:1px solid #97c1ff}
+  .clg{background:var(--grn-l);border:1px solid #6fdc8c}
+  /* 2COL */
+  .tc{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  @media(max-width:700px){.tc{grid-template-columns:1fr}}
+  /* FOOTER */
+  .ft{border-top:1px solid var(--bdr);margin-top:3rem;padding-top:1.1rem;text-align:center;font-size:11px;color:var(--g50)}
+  @media(max-width:640px){.mh-i,.tb-i,.pb{padding-left:1rem;padding-right:1rem}.arch-row{flex-direction:column}.aa{display:none}}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="mh">
+  <div class="mh-i">
+    <div class="mh-ey">Arrow AEC · Partner Recruitment Briefing — October 2026</div>
+    <div class="mh-brands">
+      <span class="chip chip-m">Microsoft Copilot</span>
+      <span style="color:rgba(255,255,255,.2);font-size:14px;">+</span>
+      <span class="chip chip-i">IBM watsonx Orchestrate</span>
+      <span style="color:rgba(255,255,255,.2);font-size:14px;">+</span>
+      <span class="chip chip-a">Arrow AEC</span>
+      <span style="color:rgba(255,255,255,.2);font-size:14px;">+</span>
+      <span class="chip chip-a">ArrowSphere</span>
+      <span style="color:rgba(255,255,255,.2);font-size:14px;">=</span>
+      <span class="chip chip-o">ORBIT</span>
+    </div>
+    <div class="mh-title"><span class="mw">Microsoft Copilot</span> + <span class="iw">watsonx Orchestrate</span> — deployed as <span class="ow">ORBIT</span> by Arrow</div>
+    <div class="mh-sub">The Arrow play for Microsoft Azure partners · IBM Client Zero proof points · how to show it · how to sell it</div>
+  </div>
+  <div class="tb">
+    <div class="tb-i">
+      <button class="tab on" onclick="show('ov',this)"><span class="tn">1</span>Overview</button>
+      <button class="tab" onclick="show('sc',this)"><span class="tn">2</span>Demo Scenarios</button>
+      <button class="tab" onclick="show('sl',this)"><span class="tn">3</span>Seller Guide</button>
+      <button class="tab" onclick="show('tc',this)"><span class="tn">4</span>Technical</button>
+      <button class="tab" onclick="show('rc',this)"><span class="tn">5</span>R Co Cast</button>
+      <button class="tab" onclick="show('st',this)"><span class="tn">6</span>Setup &amp; Status</button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ TAB 1 — OVERVIEW ═══ -->
+<div class="pnl on" id="pnl-ov"><div class="pb">
+
+  <div class="hero">
+    <div class="h-ey">For Microsoft Azure Partners — IBM Client Zero · watsonx Orchestrate · Microsoft Copilot</div>
+    <p class="h-q">Your Copilot customers are already asking what comes next. They've seen the chat interface. They want AI that <strong>does something</strong> — that reaches into their systems, makes decisions, routes approvals, and delivers results. That's not a Copilot limitation. That's an orchestration problem. <strong>IBM solved it.</strong> IBM's own IT, HR, Sales, and Finance teams run these exact workflows every day — in production, at scale — using watsonx Orchestrate as the intelligence and governance engine. IBM validated every one of these use cases internally before asking a single customer to buy.</p>
+    <p class="h-q" style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.1)"><strong>That's where ORBIT comes in.</strong> Arrow took those same IBM-proven workflow patterns and built them into a play your Microsoft Copilot customers will immediately recognise. <strong>IBM employees open watsonx Orchestrate directly. Your customer opens Copilot.</strong> Same proven workflow logic. Same governance record. Same orchestration engine behind it. The only thing that changes is the front door — and that front door is already open in every Teams chat your customer uses today. <em>ORBIT is how Arrow puts IBM's production-proven AI into your Copilot deals.</em></p>
+  </div>
+
+  <div class="orbit-box">
+    <div class="orbit-box-title">⚡ What ORBIT Is — The Arrow Play</div>
+    <div class="orbit-box-body"><strong>ORBIT is a play, not a product.</strong> The name — Orchestrated Runtime for Business Intelligence &amp; Tasks — belongs to the complete go-to-market motion Arrow has assembled: <strong>Microsoft Copilot</strong> as the front door your customers already trust, <strong>IBM watsonx Orchestrate</strong> as the intelligence and governance engine running behind it, packaged by <strong>Arrow AEC</strong> with IBM Client Zero reference architecture and real-world scenarios, and made available through <strong>ArrowSphere</strong> — so your customers can tap into it directly against their committed Azure spend. No separate procurement. No new vendor relationship. One motion.<br><br>ORBIT is not Arrow's copy of anything. The products are IBM's and Microsoft's. What Arrow brings is the assembled pattern — proven use cases, a reference deployment your customers can see running in thirty minutes, and a distribution path that makes it as easy to order as any other item on their ArrowSphere account. <strong>Your customers get IBM's production-proven AI workflows inside the Copilot interface they already use every day.</strong></div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd"></div><div class="st">The Three-Part Stack</div></div>
+    <div class="cg">
+      <div class="card" style="border-top:3px solid var(--msft)">
+        <div class="ct" style="color:var(--msft)">Microsoft Copilot — The Front Door</div>
+        <div class="cb">The familiar chat interface your customers already use in Teams and Outlook. Built-in M365 trust, SSO, and data residency. Zero new tools for end users to learn. Copilot receives the natural language prompt and routes it to ORBIT.</div>
+      </div>
+      <div class="card" style="border-top:3px solid #f59e0b">
+        <div class="ct" style="color:#b45309">IBM watsonx Orchestrate — The Intelligence &amp; Governance Engine</div>
+        <div class="cb">The enterprise AI runtime that Copilot routes to. Chains tools, governs model inference, enforces policy, maintains a complete audit record of every AI action taken. Reads JSON mock data as enterprise system responses, fires live M365 actions via ARIA. Arrow AEC reference deployment on <span class="bdg by">AWS now</span> → <span class="bdg bb">ArrowSphere / Azure Q1 2027</span></div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--grn)">
+        <div class="ct" style="color:var(--grn)">R Co M365 Tenant — The Stage</div>
+        <div class="cb">Live Microsoft 365 environment (<code>rcoace.com</code>). 11 real personas with real inboxes, calendars, Teams channels. ARIA handles all Microsoft Graph API calls when ORBIT directs M365 actions. JSON mock files represent all enterprise back-ends — no live ERP/ITSM/HRIS required.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd o"></div><div class="st">Real-World Data Patterns — Built for Proof</div></div>
+    <div class="strip">
+      <strong>Every scenario runs on simulated production data — modelled on what your customers are already managing.</strong> The enterprise data powering each demo — help desk tickets, CRM account records, HR onboarding records, finance actuals — is structured to reflect the real data patterns Arrow AEC sees across customer engagements. This is not generic placeholder data. It mirrors the shape, fields, and relationships of the systems your customers are running today: ServiceNow, Salesforce, Workday, SAP. When a partner or customer is ready to go live, the simulated data is replaced with direct connector calls to their actual systems — the workflow logic, the governance rules, and the Copilot experience remain identical. <strong>The demo is the architecture. The architecture is the product.</strong>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd m"></div><div class="st">Who This Is For</div></div>
+    <div class="tw"><table>
+      <thead><tr><th>Audience</th><th>What they care about</th><th>Lead scenario</th><th>Key message</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Arrow Sales / RCO</strong></td><td>Attach rate · Microsoft partner trust</td><td><span class="bdg bb">S1 — IT Help Desk</span></td><td>"One prompt. Real approval email. Real Teams notification. 60 seconds."</td></tr>
+        <tr><td><strong>Solutions Architects</strong></td><td>Architecture · JSON mock strategy · ORBIT + ARIA chain</td><td><span class="bdg bp">S2 — Sales</span> + <span class="bdg bt">S4 — Finance</span></td><td>"ORBIT is the brain. ARIA is the M365 arm. JSON mocks are the enterprise back-end. Everything is portable."</td></tr>
+        <tr><td><strong>Arrow Marketing</strong></td><td>IBM Client Zero story · differentiator</td><td><span class="bdg bb">S1</span> → <span class="bdg bp">S2</span></td><td>"IBM eats its own cooking. Every scenario is a real IBM internal workflow."</td></tr>
+        <tr><td><strong>Channel Managers</strong></td><td>What to say · how to book AEC session</td><td><span class="bdg bb">S1 — IT Help Desk</span></td><td>"30-minute AEC session. One demo. Reference architecture they take to their CIO."</td></tr>
+        <tr><td><strong>IBM Team</strong></td><td>wxO positioning · Client Zero validation</td><td><span class="bdg bp">S2 — Sales</span> + <span class="bdg bt">S4 — Finance</span></td><td>"ORBIT is watsonx Orchestrate. This is the Copilot integration IBM partners have been asking for."</td></tr>
+        <tr><td><strong>ArrowSphere / M365 Focus</strong></td><td>Copilot attach · M365 upsell</td><td><span class="bdg bb">S1</span> or <span class="bdg bo">S3 — Onboarding</span></td><td>"wxO is the Copilot upsell. Same M365 tenant. Bigger AI story. Higher deal value."</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd"></div><div class="st">Timeline</div></div>
+    <div class="tl">
+      <div class="tl-r"><div class="tld g"></div><div class="tlw">Now — Oct 2026</div><div class="tlx"><strong>R Co M365 tenant live.</strong> 11 personas, Teams, SharePoint, calendar seed script. ARIA Graph API layer operational. Four IBM Client Zero scenarios designed. JSON mock data structure defined.</div></div>
+      <div class="tl-r"><div class="tld y"></div><div class="tlw">Next milestone</div><div class="tlx"><strong>Arrow AEC reference deployment (Sub-Task 4).</strong> Arrow AEC team provisions wxO SaaS reference tenant, registers Copilot extension in rcoace.com, configures ARIA bridge, builds 10 JSON mock files, runs Scenario 1 smoke test. This is the pattern partners replicate — not a shared instance.</div></div>
+      <div class="tl-r"><div class="tld y"></div><div class="tlw">Now → Q1 2027</div><div class="tlx"><strong>Reference deployment runs on AWS.</strong> All M365 surfaces are Azure. Tell Azure-first partners: "The M365 layer is Azure today. The watsonx Orchestrate engine moves to Azure in Q1 2027 — the demo looks identical and partners can order it through ArrowSphere against committed Azure spend."</div></div>
+      <div class="tl-r"><div class="tld b"></div><div class="tlw">Q1 2027</div><div class="tlx"><strong>ArrowSphere + Azure availability.</strong> Full Azure-native stack. Partners order IBM watsonx Orchestrate through ArrowSphere, apply it to committed Azure spend ("tap-to-pay"), and deploy the ORBIT play directly into their customers' M365 tenants.</div></div>
+    </div>
+  </div>
+
+</div></div>
+
+<!-- ═══ TAB 2 — SCENARIOS ═══ -->
+<div class="pnl" id="pnl-sc"><div class="pb">
+
+  <div class="strip"><strong>Four IBM Client Zero scenarios.</strong> Each is a real IBM internal workflow pattern. Each runs in two prompts or fewer. ORBIT reads JSON mock data as enterprise system responses — portable, no back-end required. Live M365 actions (email, calendar, Teams) always fire in real inboxes.</div>
+
+  <!-- S1 -->
+  <div class="sc">
+    <div class="sc-hd">
+      <div>
+        <div class="sc-num" style="color:var(--ibm)">Scenario 01</div>
+        <div class="sc-title">IT Help Desk Self-Service</div>
+        <div class="sc-tag">Access requests, ticket creation, approval routing — automated by ORBIT, delivered to real inboxes.</div>
+      </div>
+      <div style="text-align:right">
+        <span class="aud-badge">IT Leader · CIO · Service Desk VP</span><br>
+        <span class="bdg bb" style="margin-top:4px">IBM Client Zero: IT Self-Service</span>
+      </div>
+    </div>
+    <div class="sc-bd">
+      <div>
+        <div class="sc-lbl" style="color:var(--msft)">The Copilot Prompt</div>
+        <div class="prompt">"I need VPN access for a contractor named Alex Rivera starting Monday. She's joining the AI &amp; Data team for a 90-day engagement."</div>
+        <div class="sc-json">
+          <div class="json-lbl">ORBIT reads (JSON mock)</div>contractor-registry.json → Rivera not found<br>access-policy.json → VPN + AI&amp;Data = Director approval<br>pending-tickets.json → ORBIT writes new entry
+        </div>
+      </div>
+      <div>
+        <div class="sc-lbl" style="color:var(--grn)">Live Outcomes on Screen</div>
+        <div class="outcome">
+          <strong>Screen 1:</strong> Copilot window — ticket ID created, policy cited, approval routed, confirmation.<br><br>
+          <strong>Screen 2:</strong> Grant Holloway's Outlook — structured approval email arrives live with ticket ID and policy reference.<br><br>
+          <strong>Screen 2:</strong> Teams — notification fires in R Co — Technology channel.
+        </div>
+        <div style="margin-top:.75rem;font-size:12.5px;font-style:italic;color:var(--g80)">"Grant just got a real approval request — from a Copilot prompt that ran a policy check and created a ticket. No one touched the help desk queue."</div>
+      </div>
+      <div class="sc-proof"><strong>IBM Client Zero Proof</strong> IBM's own IT help desk handles thousands of access requests this way. What your customer routes manually through a ticket queue — ORBIT automates in 60 seconds. The same workflow. The same policy enforcement. Just no human dispatcher.</div>
+    </div>
+  </div>
+
+  <!-- S2 -->
+  <div class="sc">
+    <div class="sc-hd">
+      <div>
+        <div class="sc-num" style="color:var(--pur)">Scenario 02</div>
+        <div class="sc-title">Sales Enablement &amp; Proposal Intelligence</div>
+        <div class="sc-tag">Account intelligence + competitive context + QBR draft — synthesised in 60 seconds, delivered to a real inbox.</div>
+      </div>
+      <div style="text-align:right">
+        <span class="aud-badge">Sales Leader · Sales Ops · Marketing · RevOps</span><br>
+        <span class="bdg bp" style="margin-top:4px">IBM Client Zero: Sales Intelligence</span>
+      </div>
+    </div>
+    <div class="sc-bd">
+      <div>
+        <div class="sc-lbl" style="color:var(--msft)">The Copilot Prompt</div>
+        <div class="prompt">"Pull everything we have on the Westfield partner account — engagement history, open opportunities, last QBR outcomes, and any competitive risks. Draft the opening summary section and send the brief to Dell."</div>
+        <div class="sc-json">
+          <div class="json-lbl">ORBIT reads (JSON mock)</div>account-history.json → 3 prior engagements<br>open-opportunities.json → 2 active deals<br>competitive-intel.json → flagged risks<br>last-qbr-notes.json → prior commitments
+        </div>
+      </div>
+      <div>
+        <div class="sc-lbl" style="color:var(--grn)">Live Outcomes on Screen</div>
+        <div class="outcome">
+          <strong>Screen 1:</strong> Copilot window — structured QBR opening summary with source citations (which JSON record each insight came from).<br><br>
+          <strong>Screen 2:</strong> Dell Belkin's Outlook — live briefing email from <code>claire.navarro@rcoace.com</code> arrives with full account brief inline.
+        </div>
+        <div style="margin-top:.75rem;font-size:12.5px;font-style:italic;color:var(--g80)">"That briefing email took 60 seconds. The same prep work takes your sellers 30–45 minutes. Open Dell's Outlook right now."</div>
+      </div>
+      <div class="sc-proof"><strong>IBM Client Zero Proof</strong> IBM's own sales teams pull account intelligence this way before every major customer meeting. One Copilot sentence replaces 30–45 minutes of CRM navigation and document searching. IBM measured it. The time savings per seller per week are significant.</div>
+    </div>
+  </div>
+
+  <!-- S3 -->
+  <div class="sc">
+    <div class="sc-hd">
+      <div>
+        <div class="sc-num" style="color:#b45309">Scenario 03</div>
+        <div class="sc-title">Employee Onboarding Orchestration</div>
+        <div class="sc-tag">Welcome email + calendar setup + Teams access + provisioning checklist — one prompt, four live M365 actions, under 90 seconds.</div>
+      </div>
+      <div style="text-align:right">
+        <span class="aud-badge">HR Leader · IT Ops · COO · Microsoft Viva</span><br>
+        <span class="bdg bo" style="margin-top:4px">IBM Client Zero: HR Automation</span>
+      </div>
+    </div>
+    <div class="sc-bd">
+      <div>
+        <div class="sc-lbl" style="color:var(--msft)">The Copilot Prompt</div>
+        <div class="prompt">"Onboard Priya Nair to the AI &amp; Data team — she starts Monday. Set up her first-week calendar, send her the onboarding package, add her to the R Co Technology Teams channel, and schedule her 30-minute welcome call with Darius for Tuesday at 10am."</div>
+        <div class="sc-json">
+          <div class="json-lbl">ORBIT reads (JSON mock)</div>employee-record.json → role, start date, team<br>onboarding-plan.json → first-week schedule<br>provisioning-checklist.json → Day 1 system access
+        </div>
+      </div>
+      <div>
+        <div class="sc-lbl" style="color:var(--grn)">Live Outcomes on Screen</div>
+        <div class="outcome">
+          <strong>Screen 1:</strong> Copilot — ORBIT confirms each action as it completes.<br><br>
+          <strong>Screen 2:</strong> Priya's Outlook — personalised welcome email from Darius arrives with first-week schedule.<br><br>
+          <strong>Screen 2:</strong> Priya's calendar — Tuesday 10am welcome call appears in real time.<br><br>
+          <strong>Screen 2:</strong> Teams — Priya added to R Co — Technology channel notification fires.<br><br>
+          <strong>Screen 2:</strong> Darius's Outlook — confirmation summary of all actions taken.
+        </div>
+        <div style="margin-top:.75rem;font-size:12.5px;font-style:italic;color:var(--g80)">"One prompt. Four live M365 actions. Priya's onboarded. Darius didn't open a single system."</div>
+      </div>
+      <div class="sc-proof"><strong>IBM Client Zero Proof</strong> IBM onboards thousands of employees and contractors per year. What used to take 3–4 hours of HR + IT + hiring manager coordination now runs as a single ORBIT workflow. IBM measured it. Your customer's HR team has the same coordination overhead — and the same opportunity.</div>
+    </div>
+  </div>
+
+  <!-- S4 -->
+  <div class="sc">
+    <div class="sc-hd">
+      <div>
+        <div class="sc-num" style="color:var(--tel)">Scenario 04</div>
+        <div class="sc-title">Finance &amp; Accounting Operations</div>
+        <div class="sc-tag">Budget variance report + exception flagging + two-party approval chain — inside Copilot, no finance system opened.</div>
+      </div>
+      <div style="text-align:right">
+        <span class="aud-badge">CFO · Finance VP · Controller · COO</span><br>
+        <span class="bdg bt" style="margin-top:4px">IBM Client Zero: Finance Automation</span>
+      </div>
+    </div>
+    <div class="sc-bd">
+      <div>
+        <div class="sc-lbl" style="color:var(--msft)">The Copilot Prompt</div>
+        <div class="prompt">"Give me a summary of where the Technology team is against budget this month, flag anything over threshold, and route the exceptions to Claire for approval."</div>
+        <div class="sc-json">
+          <div class="json-lbl">ORBIT reads (JSON mock)</div>budget-actuals.json → actuals vs. budget by cost center<br>open-invoices.json → pending vendor invoices<br>expense-exceptions.json → 3 flagged over threshold
+        </div>
+        <div style="margin-top:.75rem">
+          <div class="sc-lbl" style="color:#b45309">Optional Second Prompt (powerful closer)</div>
+          <div class="prompt">"Check if Claire has responded to the budget exceptions."</div>
+          <div style="font-size:11.5px;color:var(--g70);margin-top:.4rem;font-style:italic">ORBIT reads Claire's reply via M365, updates approval state, confirms back to Marcus. <strong>Live two-party approval workflow — end to end inside Copilot.</strong></div>
+        </div>
+      </div>
+      <div>
+        <div class="sc-lbl" style="color:var(--grn)">Live Outcomes on Screen</div>
+        <div class="outcome">
+          <strong>Screen 1:</strong> Copilot — variance summary with flagged exceptions highlighted, approval routed confirmation.<br><br>
+          <strong>Screen 2:</strong> Marcus's Outlook — budget summary email with structured variance table arrives live.<br><br>
+          <strong>Screen 2:</strong> Claire's Outlook — structured approval request with three line-item exceptions arrives live, ready to decide.<br><br>
+          <strong>After second prompt:</strong> Confirmation to Marcus — "All three approved by Claire Navarro at 2:47pm."
+        </div>
+        <div style="margin-top:.75rem;font-size:12.5px;font-style:italic;color:var(--g80)">"Two live emails. One Copilot prompt. No finance system opened. And if you run the second prompt — a complete request-decision-confirmation approval chain, inside Copilot."</div>
+      </div>
+      <div class="sc-proof"><strong>IBM Client Zero Proof</strong> IBM Finance teams close the books faster because exception routing and variance reporting run as watsonx Orchestrate workflows. Multi-day email chains between Finance and department heads become two-minute Copilot conversations. IBM measured the cycle time reduction.</div>
+    </div>
+  </div>
+
+</div></div>
+
+<!-- ═══ TAB 3 — SELLER GUIDE ═══ -->
+<div class="pnl" id="pnl-sl"><div class="pb">
+
+  <div class="strip"><strong>For Arrow Sales, SAs, Channel Managers, IBM team, and ArrowSphere.</strong> Audience selector, scenario opening lines, objection handlers, and the close. Everything you need in one place.</div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd"></div><div class="st">Audience Selector</div></div>
+    <div class="tw"><table>
+      <thead><tr><th>Who's in the room?</th><th>Lead with</th><th>Also show</th><th>Skip</th></tr></thead>
+      <tbody>
+        <tr><td><strong>IT Leader / CIO / Service Desk VP</strong></td><td><span class="bdg bb">S1 — IT Help Desk</span></td><td>S3 Onboarding</td><td>S4 Finance</td></tr>
+        <tr><td><strong>Sales Leader / Sales Ops / Marketing</strong></td><td><span class="bdg bp">S2 — Sales Enablement</span></td><td>S1 Help Desk</td><td>S4 Finance</td></tr>
+        <tr><td><strong>HR / People Ops / COO</strong></td><td><span class="bdg bo">S3 — Employee Onboarding</span></td><td>S2 Sales</td><td>S4 Finance</td></tr>
+        <tr><td><strong>CFO / Finance VP / Controller</strong></td><td><span class="bdg bt">S4 — Finance Operations</span></td><td>S1 Help Desk</td><td>S2 Sales</td></tr>
+        <tr><td><strong>Microsoft partner (mixed exec)</strong></td><td><span class="bdg bb">S1</span> → <span class="bdg bp">S2</span> back-to-back</td><td>—</td><td>S4</td></tr>
+        <tr><td><strong>ArrowSphere / M365-focused</strong></td><td><span class="bdg bb">S1</span> or <span class="bdg bo">S3</span></td><td>S2</td><td>S4</td></tr>
+        <tr><td><strong>IBM QBR / Arrow leadership</strong></td><td><span class="bdg bt">S4 — Finance</span> (ROI angle)</td><td>S1</td><td>S2</td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:12px;color:var(--g70);margin-top:.6rem"><strong>Rule:</strong> Lead with the scenario where the audience can immediately see their own team's problem. If they nod within 30 seconds, you've won.</p>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd m"></div><div class="st">What to Say When You Walk In</div></div>
+    <div class="card" style="border-left:4px solid var(--ibm)">
+      <div class="cb" style="font-size:13.5px;font-style:italic;line-height:1.8;color:var(--g80)">"What you're about to see is Microsoft Copilot as the front door, and IBM watsonx Orchestrate as the intelligence engine behind it. The Microsoft 365 surfaces — email, calendar, Teams — are live. When we run this prompt, a real email lands in a real inbox. IBM runs this internally every day before selling it. Let me show you."</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd r"></div><div class="st">Objection Handlers</div></div>
+    <div class="obj">
+      <div class="obj-q">❓ "Why not just use Copilot Studio / Copilot Agents?"</div>
+      <div class="obj-a">"Copilot Studio builds connectors — point-to-point integrations between Copilot and a specific API. If you need Copilot to read a SharePoint list, Copilot Studio is the right tool.<br><br>watsonx Orchestrate is not a connector. It is an enterprise AI runtime. In Scenario 4, Copilot Studio can call a finance API. It cannot read three data sources, identify exceptions based on policy, synthesise a variance narrative, route the approval to the right person based on org structure, and register the entire chain as a governed AI action — all from one prompt. <strong>That requires an orchestration engine, not a connector.</strong><br><br>They complement each other. Copilot Studio for simple integrations. watsonx Orchestrate for multi-step enterprise workflows. Arrow deploys both."</div>
+    </div>
+    <div class="obj">
+      <div class="obj-q">❓ "IBM and Microsoft are competitors."</div>
+      <div class="obj-a">"Microsoft sells the collaboration and productivity surface — M365, Teams, SharePoint, Copilot. IBM sells the enterprise AI runtime — orchestration, governance, model lifecycle, regulated workflows. These are not the same market. <strong>The proof is that IBM built the Copilot integration.</strong> They built it because their customers asked for it. Arrow is the distributor that makes the combined stack deployable."</div>
+    </div>
+    <div class="obj">
+      <div class="obj-q">❓ "Is this available in Azure?" <span class="bdg by" style="margin-left:.5rem">Be direct — don't hide the timeline</span></div>
+      <div class="obj-a">"The watsonx Orchestrate SaaS Copilot integration runs on <strong>AWS today</strong>. Azure availability is on IBM's roadmap for <strong>January 2027</strong>. Everything you see in Microsoft 365 — the inboxes, Teams, SharePoint, the Copilot surface — that is all Azure today. The orchestration engine moves to Azure in January. If your customer is Azure-first, January 2027 is the right engagement window — and what you're seeing now is exactly what it will look like."</div>
+    </div>
+    <div class="obj">
+      <div class="obj-q">❓ "What about the data — is this connected to a live system?"</div>
+      <div class="obj-a">"The enterprise back-end data in this demo — the ITSM tickets, account records, HR data, budget actuals — are portable JSON files ORBIT reads as tool responses. <strong>This is intentional.</strong> The demo runs anywhere, no VPN, no live back-end access, no security review. When Arrow deploys this for a real customer, we wire the same agent to their actual ITSM, CRM, or ERP system. The JSON is designed to be replaced with live data on day one of a real deployment."</div>
+    </div>
+    <div class="obj">
+      <div class="obj-q">❓ "Can we deploy this for our customers?"</div>
+      <div class="obj-a">"Yes. Arrow stands up the watsonx Orchestrate SaaS tenant, registers the Copilot extension in the customer's M365 tenant, builds the JSON mock files for their actual business processes, and delivers a working demo environment they own. We have done this. <strong>The environment you're watching right now is the deliverable.</strong>"</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd g"></div><div class="st">The Close</div></div>
+    <div class="card" style="border-left:4px solid var(--grn)">
+      <div class="cb" style="font-size:13.5px;font-style:italic;line-height:1.8;color:var(--g80)">"Here is what Arrow brings that no one else does. IBM brings watsonx Orchestrate and the Client Zero proof — IBM runs these workflows in production before selling them. Microsoft brings Copilot and the M365 surface your customers already trust. Arrow assembles the play — the reference architecture, the IBM Client Zero scenarios, the AEC enablement — and makes the whole stack available through ArrowSphere so your customers can tap it directly against their committed Azure spend. No separate procurement. No integration project. One motion.<br><br>The next step is a 30-minute AEC session. We pick the scenario that matches your customer's team, we run the demo live, and they leave with a reference architecture they can take to their CIO. That is ORBIT. That is the play."</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd"></div><div class="st">TSA &amp; Seller Ownership</div></div>
+    <div class="tw"><table>
+      <thead><tr><th>Scenario</th><th>IBM Client Zero Domain</th><th>wxO / Intelligence Engine</th><th>M365 Layer</th><th>Field Lead</th></tr></thead>
+      <tbody>
+        <tr><td><span class="bdg bb">S1</span> IT Help Desk</td><td>IT Self-Service</td><td>Arrow AEC team</td><td>Arrow AEC team</td><td>RCO Microsoft / IT field</td></tr>
+        <tr><td><span class="bdg bp">S2</span> Sales Enablement</td><td>Sales Intelligence</td><td>Arrow AEC team</td><td>Arrow AEC team</td><td>RCO sales-focused</td></tr>
+        <tr><td><span class="bdg bo">S3</span> Employee Onboarding</td><td>HR Automation</td><td>Arrow AEC team</td><td>Arrow AEC team</td><td>RCO HR / M365 field</td></tr>
+        <tr><td><span class="bdg bt">S4</span> Finance Operations</td><td>Finance Automation</td><td>Arrow AEC team</td><td>Arrow AEC team</td><td>RCO finance / FinOps</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+</div></div>
+
+<!-- ═══ TAB 4 — TECHNICAL ═══ -->
+<div class="pnl" id="pnl-tc"><div class="pb">
+
+  <div class="cl cly"><strong>⚠ Key distinction:</strong> ORBIT is the Arrow play — the assembled combination of Copilot + watsonx Orchestrate + AEC reference architecture + ArrowSphere distribution. The Arrow AEC reference deployment is a single instance of that play used for demonstration. Partners deploy their own instances. ARIA is the AEC-built M365 execution layer — watsonx Orchestrate calls ARIA for all Graph API actions. Do not conflate the play, the reference deployment, or the components in partner conversations.</div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd"></div><div class="st">Architecture — Live vs. Mocked</div></div>
+    <div class="arch">
+      <div class="arch-lbl">Full stack — what is live, what is JSON mock</div>
+      <div class="arch-row">
+        <div class="an cop">
+          <div class="live-tag">LIVE</div>
+          <div class="an-tag" style="color:#74b9f7">Front Door</div>
+          <div class="an-name">Microsoft Copilot</div>
+          <div class="an-desc">User types in Teams / Outlook. Copilot Extension routes to ORBIT endpoint.</div>
+        </div>
+        <div class="aa">→</div>
+        <div class="an orb">
+          <div class="live-tag">LIVE</div>
+          <div class="an-tag" style="color:#fbbf24">Intelligence &amp; Governance Engine</div>
+          <div class="an-name">IBM watsonx Orchestrate SaaS</div>
+          <div class="an-desc">Arrow AEC reference deployment · AWS now → ArrowSphere / Azure Q1 2027</div>
+        </div>
+        <div class="aa">→</div>
+        <div class="an ari">
+          <div class="live-tag">LIVE</div>
+          <div class="an-tag" style="color:#6ee09b">M365 Execution Layer</div>
+          <div class="an-name">ARIA (Graph API)</div>
+          <div class="an-desc">AEC-built agent. Called BY ORBIT for all M365 actions — email, calendar, Teams, SharePoint.</div>
+        </div>
+        <div class="aa">→</div>
+        <div class="an m365">
+          <div class="live-tag">LIVE</div>
+          <div class="an-tag" style="color:rgba(255,255,255,.5)">The Stage</div>
+          <div class="an-name">R Co M365 Tenant</div>
+          <div class="an-desc">rcoace.com · 11 real personas · real inboxes · Teams · SharePoint · calendars</div>
+        </div>
+        <div class="aa">+</div>
+        <div class="an jso">
+          <div class="mock-tag">JSON MOCK</div>
+          <div class="an-tag" style="color:rgba(255,255,255,.3)">Enterprise Back-Ends</div>
+          <div class="an-name">ITSM · CRM · HRIS · Finance</div>
+          <div class="an-desc">Portable JSON files. No VPN. No live system. Fully replaceable with real connectors on deployment day.</div>
+        </div>
+      </div>
+      <div class="arch-note">ORBIT reads JSON files as mock API tool responses. Partners see ORBIT "calling" enterprise systems. The JSON is the enterprise system for this demo.</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd"></div><div class="st">Layer Reference</div></div>
+    <div class="tw"><table>
+      <thead><tr><th>Layer</th><th>What it is</th><th>Owner</th><th>Hosting</th><th>Role in demo</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Microsoft Copilot</strong></td><td>M365 Copilot chat</td><td>Microsoft</td><td>Azure (M365)</td><td>Front door — routes natural language prompts to ORBIT via Copilot extension</td></tr>
+        <tr><td><strong>IBM watsonx Orchestrate SaaS</strong></td><td>Intelligence &amp; Governance Engine (the ORBIT play core)</td><td>Arrow AEC team</td><td><span class="bdg by">AWS now</span> → <span class="bdg bb">ArrowSphere / Azure Q1 2027</span></td><td>Chains tools, governs model inference, enforces policy, maintains audit record, returns result to Copilot</td></tr>
+        <tr><td><strong>ARIA</strong></td><td>Arrow-built wxO ADK agent</td><td>Arrow AEC team</td><td>Azure (AEC)</td><td>M365 execution arm — all Microsoft Graph API calls directed by ORBIT</td></tr>
+        <tr><td><strong>R Co M365 Tenant</strong></td><td>Live Microsoft 365</td><td>AEC team</td><td>Azure (<code>rcoace.com</code>)</td><td>The stage — real inboxes, calendars, Teams, SharePoint, 11 live personas</td></tr>
+        <tr><td><strong>JSON Mock Data</strong></td><td>Portable static files</td><td>Arrow AEC team</td><td>Local / wxO tool store</td><td>Represents ITSM, CRM, HRIS, Finance systems — no live back-end required. Partners replace with live connectors on deployment day.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd"></div><div class="st">ORBIT Setup Requirements (Sub-Task 4)</div></div>
+    <div class="tw"><table>
+      <thead><tr><th>Requirement</th><th>Scenario</th><th>Status</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Copilot extension registration</strong></td><td>All</td><td><span class="bdg br">Critical path</span></td><td>Register ORBIT as Copilot plugin in <code>rcoace.com</code> M365 admin center</td></tr>
+        <tr><td><strong>ARIA bridge connector</strong></td><td>All</td><td><span class="bdg by">Pending</span></td><td>Wire ORBIT to call ARIA's Graph API endpoints for all M365 actions</td></tr>
+        <tr><td><strong>S1 JSON mock files (3 files)</strong></td><td>S1</td><td><span class="bdg by">Pending</span></td><td><code>contractor-registry.json · access-policy.json · pending-tickets.json</code></td></tr>
+        <tr><td><strong>S2 JSON mock files (4 files)</strong></td><td>S2</td><td><span class="bdg by">Pending</span></td><td><code>account-history.json · open-opportunities.json · competitive-intel.json · last-qbr-notes.json</code></td></tr>
+        <tr><td><strong>S3 JSON mock files (3 files)</strong></td><td>S3</td><td><span class="bdg by">Pending</span></td><td><code>employee-record.json · onboarding-plan.json · provisioning-checklist.json</code></td></tr>
+        <tr><td><strong>S4 JSON mock files (3 files)</strong></td><td>S4</td><td><span class="bdg by">Pending</span></td><td><code>budget-actuals.json · open-invoices.json · expense-exceptions.json</code></td></tr>
+        <tr><td><strong>Scenario 1 smoke test</strong></td><td>S1</td><td><span class="bdg by">Pending</span></td><td>Copilot prompt → ORBIT → ARIA → approval email lands in Grant's inbox → confirm</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd o"></div><div class="st">Simulated Data Files — Per Scenario</div></div>
+    <div class="strip"><strong>These files are the enterprise back-end for the reference deployment.</strong> Each is a structured data file watsonx Orchestrate reads as a mock API tool response. No VPN, no live back-end connection, no security review required. Partners replace these files with live connector calls to their actual systems on deployment day — the workflow logic does not change.</div>
+    <div class="cg4">
+      <div class="card"><div class="ct">Scenario 1 — IT Help Desk</div><div class="cb"><code>contractor-registry.json</code><br><code>access-policy.json</code><br><code>pending-tickets.json</code><br><span style="font-size:11px;color:var(--g50);margin-top:.4rem;display:block">Mirrors: ServiceNow / Active Directory patterns</span></div></div>
+      <div class="card"><div class="ct">Scenario 2 — Sales Enablement</div><div class="cb"><code>account-history.json</code><br><code>open-opportunities.json</code><br><code>competitive-intel.json</code><br><code>last-qbr-notes.json</code><br><span style="font-size:11px;color:var(--g50);margin-top:.4rem;display:block">Mirrors: Salesforce / CRM patterns</span></div></div>
+      <div class="card"><div class="ct">Scenario 3 — Employee Onboarding</div><div class="cb"><code>employee-record.json</code><br><code>onboarding-plan.json</code><br><code>provisioning-checklist.json</code><br><span style="font-size:11px;color:var(--g50);margin-top:.4rem;display:block">Mirrors: Workday / HRIS patterns</span></div></div>
+      <div class="card"><div class="ct">Scenario 4 — Finance Operations</div><div class="cb"><code>budget-actuals.json</code><br><code>open-invoices.json</code><br><code>expense-exceptions.json</code><br><span style="font-size:11px;color:var(--g50);margin-top:.4rem;display:block">Mirrors: SAP / ERP patterns</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd"></div><div class="st">Credentials &amp; Vault</div></div>
+    <div class="cl clb" style="margin-bottom:.75rem">All credentials are stored in <strong>IBM HashiCorp Vault</strong>. No passwords or secrets are recorded in this document. Retrieve all credentials from Vault before running the demo environment.</div>
+    <div class="tw"><table>
+      <thead><tr><th>What</th><th>Vault Path</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>M365 Service Principal</td><td><code>aec-credentials/azure/ibm-asl-user</code></td><td>App: <code>aec-terraform-admin</code> — ARIA Graph API authentication</td></tr>
+        <tr><td>Tenant Admin Credential</td><td><code>aec-credentials/projects/watson-experience/wxo</code> → key: <code>cpd_admin_password</code></td><td><code>admin@aslibm.onmicrosoft.com</code> — required for Copilot extension registration</td></tr>
+        <tr><td>Azure Tenant ID</td><td><code>dae4514b-64d5-452c-9fff-e607c38af2da</code></td><td>IBM-US tenant — non-secret identifier</td></tr>
+        <tr><td>Persona credentials</td><td>Secured in IBM HashiCorp Vault</td><td>All R Co persona accounts — retrieve from Vault before demo; force-change-password flag set on all accounts</td></tr>
+        <tr><td>Calendar seed script</td><td colspan="2"><code>python projects/programs/rco/universe/demo-artifacts/seed-calendar.py</code> — run at T-24h</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+</div></div>
+
+<!-- ═══ TAB 5 — R CO CAST ═══ -->
+<div class="pnl" id="pnl-rc"><div class="pb">
+
+  <div class="strip"><strong>R Co is a fictional mid-market technology company</strong> that provides the stage for all ORBIT + Copilot demos. The R Co personas are real M365 accounts in the <code>rcoace.com</code> tenant — real inboxes, real calendars, real Teams channels. The IBM Client Zero scenarios use these characters because they are already live and licensed. The scenarios themselves are independent of the R Co six-track demo universe narrative.</div>
+
+  <div class="cl cly"><strong>Not demo accounts:</strong> <code>admin@aslibm.onmicrosoft.com</code> (Wendy Frank, tenant admin) and <code>earl.springer@rcoace.com</code> (backup operations). Sam Ito has no live M365 account — narrative only.</div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd"></div><div class="st">The Cast — 12 Personas</div></div>
+    <div class="tw"><table>
+      <thead><tr><th>#</th><th>Name</th><th>Title</th><th>UPN</th><th>M365</th><th>Copilot</th><th>ORBIT scenario role</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Victoria Reyes</strong></td><td>President &amp; CEO</td><td><code>victoria.reyes@rcoace.com</code></td><td><span class="bdg bb">O365 E3</span></td><td><span class="bdg bg">Yes</span></td><td>Narrative executive</td></tr>
+        <tr><td>2</td><td><strong>Claire Navarro</strong></td><td>VP, Strategic Operations</td><td><code>claire.navarro@rcoace.com</code></td><td><span class="bdg bb">O365 E3</span></td><td><span class="bdg bg">Yes</span></td><td>S2 — sends QBR briefing email to Dell; S4 — receives + approves budget exceptions</td></tr>
+        <tr><td>3</td><td><strong>Marcus Cole</strong></td><td>VP, Technology Operations</td><td><code>marcus.cole@rcoace.com</code></td><td><span class="bdg bb">O365 E3</span></td><td><span class="bdg bg">Yes</span></td><td>S4 — requests budget summary; receives variance report email</td></tr>
+        <tr><td>4</td><td><strong>Dell Belkin</strong></td><td>Manager, Partner Enablement</td><td><code>dell.belkin@rcoace.com</code></td><td><span class="bdg by">M365 E3</span></td><td><span class="bdg bgr">No</span></td><td>S2 — receives QBR briefing email from Claire live</td></tr>
+        <tr><td>5</td><td><strong>Jo King</strong></td><td>Project Coordinator</td><td><code>joking@rcoace.com</code></td><td><span class="bdg by">M365 E3</span></td><td><span class="bdg bg">Yes</span></td><td>Available for additional scenario use</td></tr>
+        <tr><td>6</td><td><strong>Grant Holloway</strong></td><td>Director, Identity &amp; Security</td><td><code>grant.holloway@rcoace.com</code></td><td><span class="bdg bb">O365 E3</span></td><td><span class="bdg bg">Yes</span></td><td>S1 — receives contractor access approval request email + Teams notification</td></tr>
+        <tr><td>7</td><td><strong>Priya Nair</strong></td><td>Manager, AI &amp; Data Operations</td><td><code>priya.nair@rcoace.com</code></td><td><span class="bdg bb">O365 E3</span></td><td><span class="bdg bg">Yes</span></td><td>S3 — new hire being onboarded; receives welcome email + calendar event</td></tr>
+        <tr><td>8</td><td><strong>Theo Bassett</strong></td><td>Senior Data Engineer</td><td><code>theo.bassett@rcoace.com</code></td><td><span class="bdg bb">O365 E3</span></td><td><span class="bdg bg">Yes</span></td><td>Available for data-focused scenario use</td></tr>
+        <tr><td>9</td><td><strong>Camille Durand</strong></td><td>AI Operations Analyst</td><td><code>camille.durand@rcoace.com</code></td><td><span class="bdg bb">O365 E3</span></td><td><span class="bdg bg">Yes</span></td><td>Available for governance scenario use</td></tr>
+        <tr><td>10</td><td><strong>Darius Holt</strong></td><td>Manager, Platform Observability</td><td><code>darius.holt@rcoace.com</code></td><td><span class="bdg bb">O365 E3</span></td><td><span class="bdg bg">Yes</span></td><td>S3 — hiring manager; sends onboarding email + calendar event to Priya</td></tr>
+        <tr><td>11</td><td><strong>Nina Carver</strong></td><td>Observability Engineer</td><td><code>nina.carver@rcoace.com</code></td><td><span class="bdg bb">O365 E3</span></td><td><span class="bdg bg">Yes</span></td><td>Available for technical scenario use</td></tr>
+        <tr><td>12</td><td><strong>Sam Ito</strong> <span class="bdg bgr">narrative only</span></td><td>Platform SRE</td><td><em>No live account</em></td><td><span class="bdg bgr">None</span></td><td><span class="bdg bgr">No</span></td><td>Six-track demo narrative only</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd m"></div><div class="st">M365 Tenant State</div></div>
+    <div class="cg4">
+      <div class="card"><div class="ct">License Pool</div><div class="cb">10 × Office 365 E3 (active)<br>10 × Microsoft 365 Copilot (active)<br>5 × M365 E3 no Teams (active)<br>5 × Teams Enterprise (active)</div></div>
+      <div class="card"><div class="ct">R Co Teams</div><div class="cb"><strong>R Co — All</strong> (company-wide, 4 channels)<br><strong>R Co — Operations</strong> (primary demo team)<br><strong>R Co — Technology</strong> (Tracks 2/3/4)</div></div>
+      <div class="card"><div class="ct">SharePoint</div><div class="cb">Site: R Co IT At Your Service<br><code>Partner Programs/</code><br><code>AI &amp; Data/Pipeline Runbooks/</code><br><code>Platform Operations/Observability/</code></div></div>
+      <div class="card"><div class="ct">App Registration</div><div class="cb">App: <code>aec-terraform-admin</code><br>Vault: <code>aec-credentials/azure/ibm-asl-user</code><br><span style="color:var(--red);font-size:11px">⚠ Admin consent pending</span></div></div>
+    </div>
+  </div>
+
+</div></div>
+
+<!-- ═══ TAB 6 — SETUP & STATUS ═══ -->
+<div class="pnl" id="pnl-st"><div class="pb">
+
+  <div class="sec">
+    <div class="sh"><div class="sd"></div><div class="st">Project Status</div></div>
+    <div class="tw"><table>
+      <thead><tr><th>Sub-Task</th><th>Description</th><th>Status</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr><td>ST1 — R Co HTML Briefer</td><td>Internal team reference HTML</td><td><span class="bdg bg">Complete</span></td><td>fwelder / Bob</td></tr>
+        <tr><td>ST2 — Scenario Design</td><td>4 IBM Client Zero scenarios + facilitator guide (this revision)</td><td><span class="bdg bg">Complete</span></td><td>fwelder / Bob</td></tr>
+        <tr><td>ST3 — Partner One-Pager</td><td>External partner-facing Copilot + wxO page</td><td><span class="bdg bg">Complete</span></td><td>fwelder / Bob</td></tr>
+        <tr><td><strong>ST4 — Reference Deployment</strong></td><td>Arrow AEC wxO SaaS reference tenant · Copilot extension · ARIA bridge · JSON mock data · smoke test</td><td><span class="bdg br">Pending — Critical Path</span></td><td>Arrow AEC team</td></tr>
+        <tr><td>ST6 — M365 Admin Consent</td><td>Teammate tenant deployment checklist</td><td><span class="bdg by">Pending</span></td><td>fwelder</td></tr>
+        <tr><td>ST7 — DEMO-GUIDE update</td><td>Full R Co cast + ORBIT scenarios in DEMO-GUIDE.md</td><td><span class="bdg by">Pending</span></td><td>fwelder</td></tr>
+        <tr><td>ST9 — Domain Migration</td><td>rcoace.com as primary Azure tenant domain</td><td><span class="bdg by">Pending</span></td><td>fwelder</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd r"></div><div class="st">Sub-Task 4 — ORBIT Setup Checklist</div></div>
+    <div class="cl clr" style="margin-bottom:1rem"><strong>🔴 Critical path blocker.</strong> Until the Copilot extension is registered, scenarios can be shown using the ORBIT wxO SaaS agent UI directly as "what Copilot routes to." The IBM Client Zero proof points and demo narrative hold. The live Copilot routing is the upgrade.</div>
+    <ul class="ck">
+      <li><div class="cb2 y"></div><div class="ckt">Provision Arrow AEC wxO SaaS reference tenant — confirm agent builder access<span class="cks">This is the ORBIT play reference deployment — the pattern partners replicate in their own tenants</span></div></li>
+      <li><div class="cb2 y"></div><div class="ckt">Register ORBIT as Copilot extension in rcoace.com M365 tenant admin center<span class="cks">Requires <code>admin@aslibm.onmicrosoft.com</code> — Vault: <code>aec-credentials/projects/watson-experience/wxo[cpd_admin_password]</code></span></div></li>
+      <li><div class="cb2 y"></div><div class="ckt">Configure ARIA bridge connector in ORBIT — wire ORBIT to call ARIA's Graph API tool endpoints<span class="cks">email · calendar · Teams · SharePoint · user operations</span></div></li>
+      <li><div class="cb2 y"></div><div class="ckt">Build S1 JSON mock files (3 files)<span class="cks"><code>contractor-registry.json · access-policy.json · pending-tickets.json</code></span></div></li>
+      <li><div class="cb2 y"></div><div class="ckt">Build S2 JSON mock files (4 files)<span class="cks"><code>account-history.json · open-opportunities.json · competitive-intel.json · last-qbr-notes.json</code></span></div></li>
+      <li><div class="cb2 y"></div><div class="ckt">Build S3 JSON mock files (3 files)<span class="cks"><code>employee-record.json · onboarding-plan.json · provisioning-checklist.json</code></span></div></li>
+      <li><div class="cb2 y"></div><div class="ckt">Build S4 JSON mock files (3 files)<span class="cks"><code>budget-actuals.json · open-invoices.json · expense-exceptions.json</code></span></div></li>
+      <li><div class="cb2 y"></div><div class="ckt">Register all 13 JSON files as ORBIT tool responses in wxO SaaS tenant</div></li>
+      <li><div class="cb2 y"></div><div class="ckt">Run Scenario 1 smoke test end-to-end<span class="cks">Copilot prompt → ORBIT → ARIA → approval email in Grant's inbox → confirm</span></div></li>
+      <li><div class="cb2 y"></div><div class="ckt">Write wxo-saas-setup-runbook.md — step-by-step for teammate reproducibility</div></li>
+    </ul>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd g"></div><div class="st">Pre-Demo Checklist (T-24h / T-0)</div></div>
+    <ul class="ck">
+      <li><div class="cb2"></div><div class="ckt"><strong>[T-24h]</strong> Run calendar seed script<div class="cblk">python projects/programs/rco/universe/demo-artifacts/seed-calendar.py</div></div></li>
+      <li><div class="cb2"></div><div class="ckt"><strong>[T-24h]</strong> Confirm Azure admin consent on <code>aec-terraform-admin</code> app registration<span class="cks">All Graph API permissions must show "Granted"</span></div></li>
+      <li><div class="cb2"></div><div class="ckt"><strong>[T-24h]</strong> Confirm ORBIT wxO SaaS is running and Copilot extension is registered in rcoace.com</div></li>
+      <li><div class="cb2"></div><div class="ckt"><strong>[T-24h]</strong> Verify all JSON mock files are loaded as ORBIT tool responses</div></li>
+      <li><div class="cb2"></div><div class="ckt"><strong>[T-0]</strong> Smoke test: run Scenario 1 prompt → confirm approval email lands in Grant's inbox</div></li>
+      <li><div class="cb2"></div><div class="ckt"><strong>[T-0]</strong> Pre-stage screens: Copilot chat · Recipient Outlook + calendar · governance dashboard · Instana</div></li>
+    </ul>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><div class="sd"></div><div class="st">All Artifact Locations</div></div>
+    <div class="tw"><table>
+      <thead><tr><th>File</th><th>Purpose</th><th>Audience</th></tr></thead>
+      <tbody>
+        <tr><td><code>demo-artifacts/copilot-wxo-team-briefing.html</code></td><td>This document — full team briefing, all tabs</td><td>All — Arrow + IBM + ArrowSphere</td></tr>
+        <tr><td><code>client-zero-copilot-wxo-scenario.md</code></td><td>Four scenarios with full tool chains, JSON mock specs, architecture</td><td>Internal — demo design</td></tr>
+        <tr><td><code>demo-artifacts/copilot-wxo-facilitator-guide.md</code></td><td>Audience selector, quick cards, objections, close script</td><td>Field sellers / TSAs / Channel Managers</td></tr>
+        <tr><td><code>demo-artifacts/rco-demo-universe-briefer.html</code></td><td>R Co tenant reference — personas, credentials, talk tracks</td><td>Internal — AEC team / TSAs</td></tr>
+        <tr><td><code>bob-showcase/src/demos/copilot-wxo-affinity-demo.html</code></td><td>Partner-facing one-pager — value prop, scenario cards, Why Arrow</td><td>External — Microsoft partners</td></tr>
+        <tr><td><code>demo-artifacts/mock-data/scenario-N/</code></td><td>JSON mock data files (10 files across 4 scenarios)</td><td>ORBIT tool configuration — Sub-Task 4</td></tr>
+        <tr><td><code>msft-copilot-wxo-affinity-demo-plan.md</code></td><td>Full engagement plan — all sub-tasks, decisions</td><td>Internal — project tracking</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+</div></div>
+
+<div class="pb" style="padding-top:0">
+  <footer class="ft">
+    Arrow AEC · ORBIT × Microsoft Copilot · IBM watsonx Orchestrate Affinity Play · Team Briefing · October 2026<br>
+    <code>projects/programs/rco/universe/demo-artifacts/copilot-wxo-team-briefing.html</code>
+    <br><br><span style="font-size:10px;color:var(--g30)">Made with IBM Bob</span>
+  </footer>
+</div>
+
+<script>
+  function show(id,btn){
+    document.querySelectorAll('.pnl').forEach(p=>p.classList.remove('on'));
+    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+    document.getElementById('pnl-'+id).classList.add('on');
+    btn.classList.add('on');
+  }
+</script>
+</body>
+</html>
